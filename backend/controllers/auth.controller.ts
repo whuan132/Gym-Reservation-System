@@ -74,7 +74,7 @@ export const signin: RequestHandler<
       throw new ErrorResponse("Could not sign token", 500);
     }
     const JWT = jwt.sign(
-      { _id: user._id, name: user.name, email: user.email },
+      { _id: user._id, name: user.name, email: user.email, role: user.role },
       process.env.JWT_PRIVATE_KEY,
     );
     res.json({ success: true, data: JWT });
