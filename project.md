@@ -1,11 +1,77 @@
 # Gym Reservation System
 
-### Description
+## Description
 The Gym Reservation System is an online platform that allows users to make reservations for various gym services, including fitness classes, personal trainer sessions, and equipment rentals. The system provides users with the ability to view available services, make reservations, and manage their reservation records. Administrators have the ability to manage gym classes, trainers, and equipment information.
 
-### DB Schemas
+## DB Schemas
+Using MongoDB with Nodejs and Mongoose
+#### User
+```typescript
+const userSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, required:true}
+});
+const User = mongoose.model('user', userSchema);
+```
 
-### Tasks
+#### GymClass
+```typescript
+const gymClassSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    capacity: { type: Number, required: true },
+    date: { type: Date, required: true },
+    time: { type: String, required: true },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'review' }],
+});
+
+const GymClass = mongoose.model('gym_class', gymClassSchema);
+```
+
+#### Trainer
+```typescript
+const trainerSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    name: { type: String, required: true },
+    specialization: { type: String, required: true },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'review' }],
+});
+
+const Trainer = mongoose.model('trainer', trainerSchema);
+```
+
+#### Reservation
+```typescript
+const reservationSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+    classId: { type: mongoose.Schema.Types.ObjectId, ref: 'gym_class', required: true },
+    trainerId: { type: mongoose.Schema.Types.ObjectId, ref: 'trainer' },
+    date: { type: Date, required: true },
+    time: { type: String, required: true },
+});
+
+const Reservation = mongoose.model('reservation', reservationSchema);
+```
+
+#### Review
+```typescript
+const reviewSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
+});
+
+const Review = mongoose.model('review', reviewSchema);
+```
+
+## Tasks
 The following tasks should be implemented in the Gym Reservation System:
 #### User Functionalities:
 - Registration/Authentication: Users should be able to register for a new account and log in to an existing account. JWT authentication should be used to ensure account security.
@@ -16,33 +82,32 @@ The following tasks should be implemented in the Gym Reservation System:
 - Administrator Login: Administrators should be able to log in to the backend for information management.
 - Manage Gym Services: Administrators should be able to add, edit, and delete gym class, trainer, and equipment information.
 
-### Schedule
+## Schedule
 The development of the Gym Reservation System can be divided into the following stages:
 
-#### 1. Database Design and Setup:
+#### Database Design and Setup:
 - Design the database schemas based on the requirements.
 - Set up the database and create the necessary tables.
 - Establish the relationships between the tables using foreign keys.
 
-#### 2. Backend Development:
+#### Backend Development:
 - Implement the backend using Express.js.
 - Create API endpoints for user registration, authentication, and reservation management.
 - Implement JWT authentication for secure user access.
 - Develop the necessary API endpoints for administrator functionalities.
 
-#### 3. Frontend Development:
-
+#### Frontend Development:
 - Use Angular to develop the frontend application.
 - Design and implement the user interface for user registration, login, and reservation functionalities.
 - Create UI components to display gym services and reservation records.
 - Implement the necessary UI for administrator login and gym service management.
 - Integration and Testing:
 
-#### 4. Integrate the frontend and backend components.
+#### Integrate the frontend and backend components.
 - Test the system's functionality, including user registration, login, reservation creation, and cancellation.
 - Conduct thorough testing of the administrator functionalities, such as gym service management.
 
-### Member's Tasks
+## Member's Tasks
 
 #### Wenhong Huang (616003):
 - Frontend Development: Develop the user interface using Angular.
