@@ -5,6 +5,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRouter from "./routers/auth.router";
+import classesRouter from "./routers/gym-class.router";
 
 dotenv.config();
 const app = express();
@@ -32,6 +33,7 @@ app.use(express.json());
 
 // routes
 app.use("/auth", authRouter);
+app.use("/classes", classesRouter);
 
 // Catch all unhandled requests
 app.all("*", async (req, res, next) =>

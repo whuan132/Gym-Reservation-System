@@ -5,7 +5,8 @@ const schema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   capacity: { type: Number, required: true },
-  date: { type: Date, required: true },
+  start_date: { type: Number, required: true },
+  end_date: { type: Number, required: true },
   trainers: [
     {
       _id: mongoose.Schema.Types.ObjectId,
