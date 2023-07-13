@@ -18,4 +18,11 @@ export class AuthService {
       user,
     );
   }
+
+  changePassword(password: string) {
+    return this.#http.patch<{ success: boolean; data: string }>(
+      `${this.#serviceUrl}/auth/password`,
+      { password },
+    );
+  }
 }
