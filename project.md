@@ -1,0 +1,60 @@
+# Gym Reservation System
+
+### Description
+The Gym Reservation System is an online platform that allows users to make reservations for various gym services, including fitness classes, personal trainer sessions, and equipment rentals. The system provides users with the ability to view available services, make reservations, and manage their reservation records. Administrators have the ability to manage gym classes, trainers, and equipment information.
+
+### DB Schemas
+
+### Tasks
+The following tasks should be implemented in the Gym Reservation System:
+#### User Functionalities:
+- Registration/Authentication: Users should be able to register for a new account and log in to an existing account. JWT authentication should be used to ensure account security.
+- View Gym Services: Users should be able to view all available gym classes, trainers, and equipment information.
+- Make Reservations: Users should be able to make reservations for gym classes, trainer sessions, and equipment.
+- View and Manage Reservation Records: Users should be able to view their reservation records and cancel upcoming reservations.
+#### Administrator Functionalities:
+- Administrator Login: Administrators should be able to log in to the backend for information management.
+- Manage Gym Services: Administrators should be able to add, edit, and delete gym class, trainer, and equipment information.
+
+### Schedule
+The development of the Gym Reservation System can be divided into the following stages:
+
+#### 1. Database Design and Setup:
+- Design the database schemas based on the requirements.
+- Set up the database and create the necessary tables.
+- Establish the relationships between the tables using foreign keys.
+
+#### 2. Backend Development:
+- Implement the backend using Express.js.
+- Create API endpoints for user registration, authentication, and reservation management.
+- Implement JWT authentication for secure user access.
+- Develop the necessary API endpoints for administrator functionalities.
+
+#### 3. Frontend Development:
+
+- Use Angular to develop the frontend application.
+- Design and implement the user interface for user registration, login, and reservation functionalities.
+- Create UI components to display gym services and reservation records.
+- Implement the necessary UI for administrator login and gym service management.
+- Integration and Testing:
+
+#### 4. Integrate the frontend and backend components.
+- Test the system's functionality, including user registration, login, reservation creation, and cancellation.
+- Conduct thorough testing of the administrator functionalities, such as gym service management.
+
+### Member's Tasks
+
+#### Wenhong Huang (616003):
+- Frontend Development: Develop the user interface using Angular.
+- Backend Development: Implement API endpoints and integrate frontend and backend components.
+- MongoDB: Collaborate with M3 to ensure proper integration with MongoDB, including data retrieval and storage.
+
+#### Qijun Zheng (615876):
+- Frontend Development: Integrate frontend and backend components.
+- Backend Development: Develop the backend using Express and implement API endpoints.
+- MongoDB: Integration with MongoDB, including data retrieval and storage.
+
+#### Xianhong Cai (615218):
+- Frontend Development: Integrate frontend and backend components.
+- Backend Development: Integration with the backend and implement necessary functionality.
+- MongoDB: Design and set up the MongoDB database, establish the necessary collections and relationships.
