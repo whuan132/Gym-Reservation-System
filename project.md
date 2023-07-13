@@ -112,14 +112,14 @@ The development of the Gym Reservation System can be divided into the following 
 #### Wenhong Huang (616003):
 - Frontend Development: Develop the user interface using Angular.
 - Backend Development: Implement API endpoints and integrate frontend and backend components.
-- MongoDB: Collaborate with M3 to ensure proper integration with MongoDB, including data retrieval and storage.
+- MongoDB: Integration with MongoDB, including data retrieval and storage.
 
 #### Qijun Zheng (615876):
-- Frontend Development: Integrate frontend and backend components.
-- Backend Development: Develop the backend using Express and implement API endpoints.
+- Frontend Development: Use angular for front-end development, call the api interface on the node.js platform, render the page according to the interface, and configure security measures in the request header
+- Backend Development: Use the express framework and cooperate with typescript to realize an efficient api interface, so that the front end can be called conveniently and quickly, giving full play to the non-blocking properties of node.js
 - MongoDB: Integration with MongoDB, including data retrieval and storage.
 
 #### Xianhong Cai (615218):
-- Frontend Development: Integrate frontend and backend components.
+- Frontend Development: Implement signin and signup functionality using Angular.
 - Backend Development: Integration with the backend and implement necessary functionality.
 - MongoDB: Design and set up the MongoDB database, establish the necessary collections and relationships.
