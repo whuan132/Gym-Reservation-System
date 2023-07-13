@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required:true}
-});
+}, { timestamps: true, versionKey: false });
 const User = mongoose.model('user', userSchema);
 ```
 
@@ -25,8 +25,22 @@ const gymClassSchema = new mongoose.Schema({
     description: { type: String, required: true },
     capacity: { type: Number, required: true },
     date: { type: Date, required: true },
-    time: { type: String, required: true },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'review' }],
+    trainers: [{
+        _id: mongoose.Schema.Types.ObjectId,
+        name: String,
+    }],
+    reviews: [{ 
+        _id: mongoose.Schema.Types.ObjectId,
+        userId: mongoose.Schema.Types.ObjectId,
+        rating: Number,
+        comment: String,
+        createdAt: { type: Date, default: Date.now }, 
+    }],
+    reservations: [{
+        _id: mongoose.Schema.Types.ObjectId,
+        userId: mongoose.Schema.Types.ObjectId,
+        name: String,
+    }]
 });
 
 const GymClass = mongoose.model('gym_class', gymClassSchema);
@@ -38,37 +52,16 @@ const trainerSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
     specialization: { type: String, required: true },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'review' }],
+    reviews: [{
+        _id: mongoose.Schema.Types.ObjectId,
+        userId: mongoose.Schema.Types.ObjectId,
+        rating: Number,
+        comment: String,
+        createdAt: { type: Date, default: Date.now },
+    }],
 });
 
 const Trainer = mongoose.model('trainer', trainerSchema);
-```
-
-#### Reservation
-```typescript
-const reservationSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-    classId: { type: mongoose.Schema.Types.ObjectId, ref: 'gym_class', required: true },
-    trainerId: { type: mongoose.Schema.Types.ObjectId, ref: 'trainer' },
-    date: { type: Date, required: true },
-    time: { type: String, required: true },
-});
-
-const Reservation = mongoose.model('reservation', reservationSchema);
-```
-
-#### Review
-```typescript
-const reviewSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
-});
-
-const Review = mongoose.model('review', reviewSchema);
 ```
 
 ## Tasks
