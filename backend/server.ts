@@ -4,6 +4,7 @@ import ErrorResponse from "./types/ErrorResponse";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import authRouter from "./routers/auth.router";
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // routes
+app.use("/auth", authRouter);
 
 // Catch all unhandled requests
 app.all("*", async (req, res, next) =>

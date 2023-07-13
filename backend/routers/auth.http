@@ -1,0 +1,26 @@
+POST http://localhost:4000/auth/signup
+Content-Type: application/json
+
+{
+  "name": "a",
+  "email": "a@a.edu",
+  "password": "123"
+}
+
+###
+POST http://localhost:4000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "a@a.edu",
+  "password": "456"
+}
+
+###
+PATCH http://localhost:4000/auth/password
+Content-Type: application/json
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNmI0NjEwMTE2MGIxNWE1ODYyMjAiLCJuYW1lIjoiYSIsImVtYWlsIjoiYUBhLmVkdSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTY4OTI4MzM5OH0.037HdOgQVmnV_yqkwhuNawXore2uarq8j99AM0WtFCg
+
+{
+  "password": "456"
+}
