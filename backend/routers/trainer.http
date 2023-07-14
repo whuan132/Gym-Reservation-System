@@ -1,0 +1,58 @@
+GET http://localhost:4000/trainers/?page=1&page_size=10
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+POST http://localhost:4000/trainers
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "name": "Trainer001",
+  "specialization": "xxxxx"
+}
+
+###
+PATCH http://localhost:4000/trainers/64b0d94908e841d2f229ef85
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "name": "Trainer003",
+  "specialization": "xxxxx"
+}
+
+###
+DELETE http://localhost:4000/trainers/64b0da36e5c701612206c148
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+GET http://localhost:4000/trainers/64b0d94908e841d2f229ef85/reviews/?page=1&page_size=10
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+POST http://localhost:4000/trainers/64b0d94908e841d2f229ef85/reviews/
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "hello world"
+}
+
+###
+PATCH http://localhost:4000/trainers/64b0d94908e841d2f229ef85/reviews/64b0dda79110644e59b6ad54
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "rating": 3,
+  "comment": "hello world"
+}
+
+###
+DELETE http://localhost:4000/trainers/64b0d94908e841d2f229ef85/reviews/64b0ddd59110644e59b6ad5a
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json

@@ -1,18 +1,12 @@
 import mongoose, { InferSchemaType, model } from "mongoose";
+import { reviewSchema } from "./review.schema";
 
 const schema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: { type: String, required: true },
   specialization: { type: String, required: true },
-  reviews: [
-    {
-      _id: mongoose.Schema.Types.ObjectId,
-      userId: mongoose.Schema.Types.ObjectId,
-      rating: Number,
-      comment: String,
-      createdAt: { type: Date, default: Date.now },
-    },
-  ],
+  rating: { type: Number, default: 5.0 },
+  reviews: [reviewSchema],
 });
 
 export type ITrainer = InferSchemaType<typeof schema>;
