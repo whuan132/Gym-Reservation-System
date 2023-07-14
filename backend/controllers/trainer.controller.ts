@@ -73,10 +73,12 @@ export const addTrainer: RequestHandler<
   ITrainer
 > = async (req, res, next) => {
   try {
-    const { name, specialization } = req.body;
+    const { name, email, image, specialization } = req.body;
     const obj = {
       _id: new Types.ObjectId(),
       name,
+      email,
+      image,
       specialization,
     };
     await trainerModel.create(obj);

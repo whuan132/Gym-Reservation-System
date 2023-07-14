@@ -9,6 +9,8 @@ Content-Type: application/json
 
 {
   "name": "Trainer001",
+  "email": "bbb@example.xxx",
+  "image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
   "specialization": "xxxxx"
 }
 
