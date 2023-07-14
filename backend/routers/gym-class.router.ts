@@ -2,13 +2,16 @@ import { Router } from "express";
 import { checkToken } from "../middlewares/auth.middleware";
 import {
   addClass,
+  addReservation,
   addReview,
   addTrainer,
   deleteClassById,
+  deleteReservationById,
   deleteReviewById,
   deleteTrainerById,
   getClassById,
   getClasses,
+  getReservations,
   getReviews,
   getTrainers,
   updateClassById,
@@ -39,5 +42,13 @@ router
   .route("/:class_id/reviews/:review_id")
   .patch(updateReviewById)
   .delete(deleteReviewById);
+
+router
+  .route("/:class_id/reservations")
+  .get(getReservations)
+  .post(addReservation);
+router
+  .route("/:class_id/reservations/:reservation_id")
+  .delete(deleteReservationById);
 
 export default router;

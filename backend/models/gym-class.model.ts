@@ -1,5 +1,6 @@
 import mongoose, { InferSchemaType, model } from "mongoose";
 import { reviewSchema } from "./review.schema";
+import { reservationSchema } from "./reservation.schema";
 
 const schema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -16,13 +17,7 @@ const schema = new mongoose.Schema({
     },
   ],
   reviews: [reviewSchema],
-  reservations: [
-    {
-      _id: mongoose.Schema.Types.ObjectId,
-      userId: mongoose.Schema.Types.ObjectId,
-      name: String,
-    },
-  ],
+  reservations: [reservationSchema],
 });
 
 export type IGymClass = InferSchemaType<typeof schema>;
