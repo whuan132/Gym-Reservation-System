@@ -1,7 +1,11 @@
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, inject, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 import { authInterceptor } from "./auth/auth.interceptor";
@@ -13,18 +17,36 @@ import { ToastComponent } from "./toast.component";
 import { FooterComponent } from "./footer.component";
 import { HomeComponent } from "./home.component";
 import { AboutComponent } from "./about.component";
+import { AuthService } from "./auth/auth.service";
+import { NgIf } from "@angular/common";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { authGuard } from "./auth/auth.guard";
+
+function bootstrap() {
+  const authService = inject(AuthService);
+  return authService.bootstrapFactory;
+}
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomeComponent },
-  { path: "signin", component: SigninComponent, title: "signIn" },
-  { path: "signup", component: SignupComponent, title: "SignUp" },
+  { path: "home", component: HomeComponent, title: "Home" },
+  { path: "signin", component: SigninComponent, title: "Sign In" },
+  { path: "signup", component: SignupComponent, title: "Sign Up" },
   {
     path: "change_password",
     component: ChangePasswordComponent,
-    title: "ChangePassword",
+    title: "Change Password",
   },
-  { path: "about", component: AboutComponent },
+  { path: "about", component: AboutComponent, title: "About" },
+
+  {
+    path: "reservation",
+    loadChildren: () =>
+      import("./reservation/reservation.module").then(
+        (m) => m.ReservationModule,
+      ),
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({
@@ -43,8 +65,16 @@ const MY_ROUTES: Routes = [
     BrowserModule,
     RouterModule.forRoot(MY_ROUTES, { bindToComponentInputs: true }),
     ReactiveFormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgIf,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
-  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: bootstrap, multi: true },
+    provideHttpClient(withInterceptors([authInterceptor])),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
