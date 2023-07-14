@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { checkToken } from "../middlewares/auth.middleware";
 import {
-  addReview,
+  addReviewByTrainerId,
   addTrainer,
-  deleteReviewById,
+  deleteReviewByTrainerIdById,
   deleteTrainerById,
-  getReviews,
+  getReviewsByTrainerId,
   getTrainers,
-  updateReviewById,
+  updateReviewByTrainerIdById,
   updateTrainerById,
 } from "../controllers/trainer.controller";
 import { checkAdmin } from "../middlewares/admin.middleware";
@@ -21,10 +21,13 @@ router
   .patch(checkAdmin, updateTrainerById)
   .delete(checkAdmin, deleteTrainerById);
 
-router.route("/:trainer_id/reviews").get(getReviews).post(addReview);
+router
+  .route("/:trainer_id/reviews")
+  .get(getReviewsByTrainerId)
+  .post(addReviewByTrainerId);
 router
   .route("/:trainer_id/reviews/:review_id")
-  .patch(updateReviewById)
-  .delete(deleteReviewById);
+  .patch(updateReviewByTrainerIdById)
+  .delete(deleteReviewByTrainerIdById);
 
 export default router;

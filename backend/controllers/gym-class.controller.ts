@@ -145,7 +145,7 @@ export const deleteClassById: RequestHandler<
   }
 };
 
-export const getTrainers: RequestHandler<
+export const getTrainersByClassId: RequestHandler<
   { class_id: string },
   DataResponse<ITrainer[]>
 > = async (req, res, next) => {
@@ -160,7 +160,7 @@ export const getTrainers: RequestHandler<
   }
 };
 
-export const addTrainer: RequestHandler<
+export const addTrainerByClassId: RequestHandler<
   { class_id: string },
   DataResponse<string>,
   { trainer_id: string; name: string }
@@ -180,7 +180,7 @@ export const addTrainer: RequestHandler<
   }
 };
 
-export const deleteTrainerById: RequestHandler<
+export const deleteTrainerByClassIdById: RequestHandler<
   { class_id: string; trainer_id: string },
   DataResponse<number>
 > = async (req, res, next) => {
@@ -195,7 +195,7 @@ export const deleteTrainerById: RequestHandler<
   }
 };
 
-export const getReviews: RequestHandler<
+export const getReviewsByClassId: RequestHandler<
   { class_id: string },
   DataResponse<{
     page: number;
@@ -267,7 +267,7 @@ export const getReviews: RequestHandler<
   }
 };
 
-export const addReview: RequestHandler<
+export const addReviewByClassId: RequestHandler<
   { class_id: string },
   DataResponse<string>,
   { tokenData: TokenData; rating: number; comment: string }
@@ -321,7 +321,7 @@ export const addReview: RequestHandler<
   }
 };
 
-export const updateReviewById: RequestHandler<
+export const updateReviewByClassIdById: RequestHandler<
   { class_id: string; review_id: string },
   DataResponse<number>,
   { tokenData: TokenData; rating: number; comment: string }
@@ -345,7 +345,7 @@ export const updateReviewById: RequestHandler<
   }
 };
 
-export const deleteReviewById: RequestHandler<
+export const deleteReviewByClassIdById: RequestHandler<
   { class_id: string; review_id: string },
   DataResponse<number>,
   { tokenData: TokenData }
@@ -368,7 +368,7 @@ export const deleteReviewById: RequestHandler<
   }
 };
 
-export const getReservations: RequestHandler<
+export const getReservationsByClassId: RequestHandler<
   {},
   DataResponse<{
     page: number;
@@ -438,7 +438,7 @@ export const getReservations: RequestHandler<
   }
 };
 
-export const addReservation: RequestHandler<
+export const addReservationByClassId: RequestHandler<
   { class_id: string },
   DataResponse<number>,
   { tokenData: TokenData }
@@ -470,7 +470,7 @@ export const addReservation: RequestHandler<
   }
 };
 
-export const deleteReservationById: RequestHandler<
+export const deleteReservationByClassIdById: RequestHandler<
   { class_id: string; reservation_id: string },
   DataResponse<number>
 > = async (req, res, next) => {

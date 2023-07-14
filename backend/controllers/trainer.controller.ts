@@ -122,7 +122,7 @@ export const deleteTrainerById: RequestHandler<
   }
 };
 
-export const getReviews: RequestHandler<
+export const getReviewsByTrainerId: RequestHandler<
   { trainer_id: string },
   DataResponse<{
     page: number;
@@ -194,7 +194,7 @@ export const getReviews: RequestHandler<
   }
 };
 
-export const addReview: RequestHandler<
+export const addReviewByTrainerId: RequestHandler<
   { trainer_id: string },
   DataResponse<string>,
   { tokenData: TokenData; rating: number; comment: string }
@@ -248,7 +248,7 @@ export const addReview: RequestHandler<
   }
 };
 
-export const updateReviewById: RequestHandler<
+export const updateReviewByTrainerIdById: RequestHandler<
   { trainer_id: string; review_id: string },
   DataResponse<number>,
   { tokenData: TokenData; rating: number; comment: string }
@@ -272,7 +272,7 @@ export const updateReviewById: RequestHandler<
   }
 };
 
-export const deleteReviewById: RequestHandler<
+export const deleteReviewByTrainerIdById: RequestHandler<
   { trainer_id: string; review_id: string },
   DataResponse<number>,
   { tokenData: TokenData }

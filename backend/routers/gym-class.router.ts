@@ -2,20 +2,20 @@ import { Router } from "express";
 import { checkToken } from "../middlewares/auth.middleware";
 import {
   addClass,
-  addReservation,
-  addReview,
-  addTrainer,
+  addReservationByClassId,
+  addReviewByClassId,
+  addTrainerByClassId,
   deleteClassById,
-  deleteReservationById,
-  deleteReviewById,
-  deleteTrainerById,
+  deleteReservationByClassIdById,
+  deleteReviewByClassIdById,
+  deleteTrainerByClassIdById,
   getClassById,
   getClasses,
-  getReservations,
-  getReviews,
-  getTrainers,
+  getReservationsByClassId,
+  getReviewsByClassId,
+  getTrainersByClassId,
   updateClassById,
-  updateReviewById,
+  updateReviewByClassIdById,
 } from "../controllers/gym-class.controller";
 import { checkAdmin } from "../middlewares/admin.middleware";
 
@@ -31,24 +31,27 @@ router
 
 router
   .route("/:class_id/trainers")
-  .get(getTrainers)
-  .post(checkAdmin, addTrainer);
+  .get(getTrainersByClassId)
+  .post(checkAdmin, addTrainerByClassId);
 router
   .route("/:class_id/trainers/:trainer_id")
-  .delete(checkAdmin, deleteTrainerById);
+  .delete(checkAdmin, deleteTrainerByClassIdById);
 
-router.route("/:class_id/reviews").get(getReviews).post(addReview);
+router
+  .route("/:class_id/reviews")
+  .get(getReviewsByClassId)
+  .post(addReviewByClassId);
 router
   .route("/:class_id/reviews/:review_id")
-  .patch(updateReviewById)
-  .delete(deleteReviewById);
+  .patch(updateReviewByClassIdById)
+  .delete(deleteReviewByClassIdById);
 
 router
   .route("/:class_id/reservations")
-  .get(getReservations)
-  .post(addReservation);
+  .get(getReservationsByClassId)
+  .post(addReservationByClassId);
 router
   .route("/:class_id/reservations/:reservation_id")
-  .delete(deleteReservationById);
+  .delete(deleteReservationByClassIdById);
 
 export default router;
