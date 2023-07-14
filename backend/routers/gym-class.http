@@ -1,4 +1,4 @@
-GET http://localhost:4000/classes
+GET http://localhost:4000/classes/?page=1&page_size=10
 Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
 Accept: application/json
 
@@ -16,8 +16,8 @@ Content-Type: application/json
   "name": "Gym02",
   "description": "Testing",
   "capacity": 20,
-  "start_date": 123,
-  "end_date": 456
+  "startDate": 123,
+  "endDate": 456
 }
 
 ###
@@ -27,13 +27,63 @@ Content-Type: application/json
 
 {
   "name": "Gym02",
-  "description": "Testing, Test update",
+  "description": "Testing, Test update update",
   "capacity": 20,
-  "start_date": 123,
-  "end_date": 456
+  "startDate": 123,
+  "endDate": 456
 }
 
 ###
 DELETE http://localhost:4000/classes/64b07f493e12df27174542c7
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+GET http://localhost:4000/classes/64b07c579ab50f19e00dc00a/trainers
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+POST http://localhost:4000/classes/64b07c579ab50f19e00dc00a/trainers
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "trainer_id": 5,
+  "name": "xxxx"
+}
+
+###
+DELETE http://localhost:4000/classes/64b07c579ab50f19e00dc00a/trainers/00000004e35cc0e6d3663f7e
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+GET http://localhost:4000/classes/64b07c579ab50f19e00dc00a/reviews/?page=1&page_size=10
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
+
+###
+POST http://localhost:4000/classes/64b07c579ab50f19e00dc00a/reviews/
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "hello world"
+}
+
+###
+PATCH http://localhost:4000/classes/64b07c579ab50f19e00dc00a/reviews/64b0cc30c1010d4cc8a6bd76
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Content-Type: application/json
+
+{
+  "rating": 3,
+  "comment": "hello world"
+}
+
+###
+DELETE http://localhost:4000/classes/64b07c579ab50f19e00dc00a/reviews/64b0c9885eaa813791c64715
 Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
 Accept: application/json
