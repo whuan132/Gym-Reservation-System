@@ -6,11 +6,23 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GymClassesService } from "./gym-classes.service";
 import { TrainersComponent } from "./trainers.component";
-import { TrainerAddComponent } from './trainer-add.component';
+import { AddGymClassComponent } from "./add-gym-class.component";
+import { UpdateGymClassComponent } from "./update-gym-class.component";
+import { TrainerAddComponent } from "./trainer-add.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
   { path: "classes", component: ClassesComponent, title: "Classes" },
+  {
+    path: "classes/add",
+    component: AddGymClassComponent,
+    title: "AddGymClass",
+  },
+  {
+    path: "classes/update/:class_id",
+    component: UpdateGymClassComponent,
+    title: "UpdateGymClass",
+  },
   {
     path: "my",
     component: MyReservationComponent,
@@ -20,7 +32,14 @@ const MY_ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [ClassesComponent, MyReservationComponent, TrainersComponent, TrainerAddComponent],
+  declarations: [
+    ClassesComponent,
+    MyReservationComponent,
+    AddGymClassComponent,
+    UpdateGymClassComponent,
+    TrainersComponent,
+    TrainerAddComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
