@@ -369,7 +369,7 @@ export const deleteReviewByClassIdById: RequestHandler<
 };
 
 export const getReservationsByClassId: RequestHandler<
-  {},
+  { class_id: string },
   DataResponse<{
     page: number;
     pageSize: number;
@@ -387,7 +387,7 @@ export const getReservationsByClassId: RequestHandler<
     ];
     const result = await gymClassModel
       .aggregate([
-        { $match: {} },
+        { $match: { _id: new Types.ObjectId(req.params.class_id) } },
         { $project: { reservations: 1 } },
         { $unwind: "$reservations" },
         {

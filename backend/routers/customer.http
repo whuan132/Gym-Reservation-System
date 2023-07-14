@@ -1,0 +1,3 @@
+GET http://localhost:4000/customer/reservations/?page=1&page_size=10
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json
