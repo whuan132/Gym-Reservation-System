@@ -8,9 +8,14 @@ import { IUser } from "../types/user.interface";
 export class AuthService {
   #serviceUrl = "http://localhost:4000";
   #http = inject(HttpClient);
-  constructor() {}
 
   jwt = signal("");
+
+  constructor() {}
+
+  get isSignedIn(): boolean {
+    return this.jwt() !== "";
+  }
 
   signup(user: IUser) {
     return this.#http.post<{ success: boolean; data: string }>(
@@ -28,8 +33,8 @@ export class AuthService {
 
   signin(obj: { email: string; password: string }) {
     return this.#http.post<{ success: boolean; data: string }>(
-        this.#serviceUrl + "/signin",
-        obj,
+      this.#serviceUrl + "/signin",
+      obj,
     );
   }
 }

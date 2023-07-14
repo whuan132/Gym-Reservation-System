@@ -1,22 +1,21 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
+import { ToastService } from "./toast.service";
 
 @Component({
   selector: "app-root",
-  template: ` <div>
-    <nav>
-      <ul>
-        <li>
-          <a [routerLink]="['signup']">SignUp</a>
-        </li>
-        <li><a [routerLink]="['signin']">Sign-In</a></li>
-        <li>
-          <a [routerLink]="['change_password']">ChangePassword</a>
-        </li>
-        
-      </ul>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>`,
+  template: ` <app-nav />
+    <div class="flex flex-col h-screen md:justify-between">
+      <app-toast
+        *ngIf="toastService.toast().show"
+        [message]="toastService.toast().message"
+      />
+      <div class="self-start w-full">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer />
+    </div>`,
   styles: [],
 })
-export class AppComponent {}
+export class AppComponent {
+  toastService = inject(ToastService);
+}
