@@ -12,9 +12,11 @@ POST http://localhost:4000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "a@a.edu",
-  "password": "456"
+  "email": "chen@gamil.com",
+  "password": "a148888",
+  "role": "customer"
 }
+
 
 ###
 PATCH http://localhost:4000/auth/password

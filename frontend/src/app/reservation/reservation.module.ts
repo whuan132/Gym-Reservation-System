@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {CommonModule, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import { ClassesComponent } from "./classes.component";
 import { MyReservationComponent } from "./my-reservation.component";
 import { RouterModule, Routes } from "@angular/router";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { GymClassesService } from "./gym-classes.service";
 
 const MY_ROUTES: Routes = [
@@ -22,6 +22,12 @@ const MY_ROUTES: Routes = [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(MY_ROUTES),
+    NgForOf,
+    TitleCasePipe,
+    FormsModule,
+    NgForOf,
+    NgIf,
+    TitleCasePipe,
   ],
   providers: [GymClassesService],
   exports: [RouterModule],
