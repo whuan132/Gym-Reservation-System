@@ -24,7 +24,7 @@ import { authGuard } from "./auth/auth.guard";
 
 function bootstrap() {
   const authService = inject(AuthService);
-  return authService.bootstrapFactory;
+  return authService.bootstrapFactory.bind(authService);
 }
 
 const MY_ROUTES: Routes = [
