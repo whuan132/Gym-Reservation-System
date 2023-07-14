@@ -112,6 +112,10 @@ export class NavComponent implements DoCheck {
   ngDoCheck() {
     const currentPath = this.#router.url;
     switch (currentPath) {
+      case "/home":
+        this.currentPage = "Home";
+        break;
+
       case "/about":
         this.currentPage = "About";
         break;

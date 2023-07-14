@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 
@@ -59,11 +59,26 @@ import { AuthService } from "./auth.service";
                     formControlName="password"
                   />
                 </div>
-
+                <div>
+                  <label
+                    for="role"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Role</label
+                  >
+                  <select
+                    id="role"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required="true"
+                    formControlName="role"
+                  >
+                    <option value="admin">Administrator</option>
+                    <option value="customer">Customer</option>
+                  </select>
+                </div>
                 <button
                   type="submit"
                   class=" w-full focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 disabled:bg-purple-400 disabled:cursor-not-allowed"
-                  [disabled]="signInForm.status === 'INVALID'"
+                  [disabled]="signInForm.invalid"
                 >
                   Sign in
                 </button>
@@ -76,6 +91,12 @@ import { AuthService } from "./auth.service";
                     >Sign up</a
                   >
                 </p>
+
+                <div *ngIf="error">
+                  <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                    {{ error }}
+                  </p>
+                </div>
               </form>
             </div>
           </div>
@@ -92,26 +113,48 @@ export class SigninComponent {
       "",
       Validators.compose([Validators.minLength(3), Validators.required]),
     ],
+    role: ["customer", Validators.compose([Validators.required])],
   });
+  error: string = "";
   #router = inject(Router);
   #authService = inject(AuthService);
 
-  signIn() {
-    console.log(this.signInForm.value);
-    const obj = {
-      ...this.signInForm.value,
-    } as { email: string; password: string };
-
-    this.#authService.signin(obj).subscribe(async (res) => {
-      console.log("login result: ", res);
-      if (res && res.success) {
-        this.#authService.jwt.set(res.data);
-        await this.#router.navigate(["/home"]);
-      }
+  constructor() {
+    this.signInForm.valueChanges.subscribe(() => {
+      this.error = "";
     });
   }
 
-  get email() {
-    return this.signInForm.get("email") as FormControl;
+  signIn() {
+    if (this.signInForm.invalid) {
+      return;
+    }
+
+    console.log(this.signInForm.value);
+    const { email, password, role } = this.signInForm.value;
+    if (!email || !password || !role) {
+      return;
+    }
+    const obj = {
+      email: email,
+      password: password,
+      role: role,
+    };
+
+    this.#authService.signin(obj).subscribe(
+      async (res) => {
+        console.log("login result: ", res);
+        if (res && res.success) {
+          this.#authService.jwt.set(res.data);
+          await this.#router.navigate(["/home"]);
+          return;
+        }
+        this.error = "Sign in failed, please try again.";
+      },
+      (error) => {
+        console.log(error);
+        this.error = "Sign in failed, please try again.";
+      },
+    );
   }
 }
