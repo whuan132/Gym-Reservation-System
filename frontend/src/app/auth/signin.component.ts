@@ -1,71 +1,117 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthService} from "./auth.service";
-import {Observable} from "rxjs";
+import { Component, inject } from "@angular/core";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "./auth.service";
 
 @Component({
-    selector: 'app-signin',
-    template: `
-        <h3>Please login</h3>
-        <div>
-            <form [formGroup]="signInForm" (ngSubmit)="signIn()">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" formControlName="email" placeholder="Email"/>
+  selector: "app-signin",
+  template: `
+    <div>
+      <section class="bg-gray-50 dark:bg-gray-900">
+        <div
+          class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+        >
+          <div
+            class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+          >
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1
+                class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+              >
+                Sign in to your account
+              </h1>
+              <form
+                class="space-y-4 md:space-y-6"
+                [formGroup]="signInForm"
+                (ngSubmit)="signIn()"
+              >
+                <div>
+                  <label
+                    for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Your email</label
+                  >
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    autocomplete="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                    placeholder="name@company.com"
+                    required="true"
+                    formControlName="email"
+                  />
                 </div>
-                <div *ngIf=" email.invalid && email.touched && email.errors?.['require']">Email is required</div>
-                <div *ngIf=" email.invalid && email.touched && email.errors?.['email']">Email is not valid</div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password" type="password" formControlName="password" placeholder="Password"/>
+                <div>
+                  <label
+                    for="password"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    autocomplete="current-password"
+                    placeholder="••••••••"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required="true"
+                    formControlName="password"
+                  />
                 </div>
-                <button type="submit" [disabled]="signInForm.invalid">Sign In</button>
-            </form>
-        </div>
-    `,
-    styles: [
-        `.form-group {
-            margin-bottom: 10px;
-        }
 
-        label {
-            margin-bottom: 5px;
-        }`
-    ]
+                <button
+                  type="submit"
+                  class=" w-full focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 disabled:bg-purple-400 disabled:cursor-not-allowed"
+                  [disabled]="signInForm.status === 'INVALID'"
+                >
+                  Sign in
+                </button>
+
+                <p class="text-sm  font-light text-gray-500 dark:text-gray-400">
+                  Don’t have an account yet?
+                  <a
+                    [routerLink]="['', 'signup']"
+                    class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    >Sign up</a
+                  >
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  `,
+  styles: [],
 })
 export class SigninComponent {
-    signInForm = inject(FormBuilder).group({
-        fullname: [''],
-        email: ['', Validators.compose([Validators.email, Validators.required])],
-        password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+  signInForm = inject(FormBuilder).group({
+    email: ["", Validators.compose([Validators.email, Validators.required])],
+    password: [
+      "",
+      Validators.compose([Validators.minLength(3), Validators.required]),
+    ],
+  });
+  #router = inject(Router);
+  #authService = inject(AuthService);
 
-    })
-    #router = inject(Router);
-    #authService = inject(AuthService);
+  signIn() {
+    console.log(this.signInForm.value);
+    const obj = {
+      ...this.signInForm.value,
+    } as { email: string; password: string };
 
+    this.#authService.signin(obj).subscribe(async (res) => {
+      console.log("login result: ", res);
+      if (res && res.success) {
+        this.#authService.jwt.set(res.data);
+        await this.#router.navigate(["/home"]);
+      }
+    });
+  }
 
-    signIn() {
-        // console.log((this.signInForm.value))
-        const obj = {
-            ...this.signInForm.value,
-        } as { email: string; password: string };
-
-        this.#authService
-            .signin(obj)
-            .subscribe((res) => {
-                // console.log("login result: " + JSON.stringify(res));
-                if (res && res.success) {
-                    this.#authService.jwt.set(res.data);
-                    // this.#router.navigate(["/home"]);
-                }
-            });
-    }
-
-    get email() {
-        return this.signInForm.get('email') as FormControl;
-    }
-
-    ngOnInit() {
-    }
+  get email() {
+    return this.signInForm.get("email") as FormControl;
+  }
 }
