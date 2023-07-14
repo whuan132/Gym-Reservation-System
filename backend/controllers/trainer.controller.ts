@@ -88,16 +88,38 @@ export const addTrainer: RequestHandler<
   }
 };
 
+export const getTrainerById: RequestHandler<
+  { trainer_id: string },
+  DataResponse<ITrainer>
+> = async (req, res, next) => {
+  try {
+    const result = await trainerModel
+      .findOne(
+        {
+          _id: req.params.trainer_id,
+        },
+        { reviews: 0, __v: 0 },
+      )
+      .lean();
+    res.json({ success: true, data: result as ITrainer });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const updateTrainerById: RequestHandler<
   { trainer_id: string },
   DataResponse<number>,
   ITrainer
 > = async (req, res, next) => {
   try {
-    const { name, specialization } = req.body;
+    const { name, specialization, email, image } = req.body;
     const obj = {} as any;
     if (name) obj.name = name;
+    if (email) obj.email = email;
+    if (image) obj.image = image;
     if (specialization) obj.specialization = specialization;
+
     const result = await trainerModel.updateOne(
       {
         _id: req.params.trainer_id,
