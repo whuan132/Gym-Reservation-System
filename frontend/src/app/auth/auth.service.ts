@@ -25,4 +25,11 @@ export class AuthService {
       { password },
     );
   }
+
+  signin(obj: { email: string; password: string }) {
+    return this.#http.post<{ success: boolean; data: string }>(
+        this.#serviceUrl + "/signin",
+        obj,
+    );
+  }
 }

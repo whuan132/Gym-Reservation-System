@@ -8,9 +8,11 @@ import { Component } from "@angular/core";
         <li>
           <a [routerLink]="['signup']">SignUp</a>
         </li>
+        <li><a [routerLink]="['signin']">Sign-In</a></li>
         <li>
           <a [routerLink]="['change_password']">ChangePassword</a>
         </li>
+        
       </ul>
     </nav>
     <router-outlet></router-outlet>
