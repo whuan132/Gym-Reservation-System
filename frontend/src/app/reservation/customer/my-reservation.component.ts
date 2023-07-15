@@ -1,6 +1,5 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { MyReservationService } from "./my-reservation.service";
-import { Router } from "@angular/router";
 import { IGymClass } from "../../types/gym-class.interface";
 import { IPageData } from "../../types/page-data.interface";
 import IconHelper from "../../utils/IconHelper";
@@ -51,34 +50,11 @@ import IconHelper from "../../utils/IconHelper";
         </div>
       </div>
     </ng-template>
-
-    <!--    <div class="center-div">-->
-    <!--      &lt;!&ndash;      <h3>Reservation List</h3>&ndash;&gt;-->
-    <!--      <div *ngIf="gymClasses">-->
-    <!--        <ul>-->
-    <!--          <li *ngFor="let cls of gymClasses">-->
-    <!--            {{ cls.name | titlecase }}-->
-    <!--            <button-->
-    <!--              (click)="deleteReservationByGymClassId(cls._id)"-->
-    <!--              style="padding-right: 10px;"-->
-    <!--            >-->
-    <!--              Delete-->
-    <!--            </button>-->
-    <!--            <button (click)="updateReservation(cls._id)">Update</button>-->
-    <!--          </li>-->
-    <!--        </ul>-->
-    <!--        <br />-->
-    <!--        <button (click)="addReservation()">Add Reservation</button>-->
-    <!--      </div>-->
-
-    <!--      <ng-template #loader><h1>Loading...</h1></ng-template>-->
-    <!--    </div>-->
   `,
   styles: [``],
 })
-export class MyReservationComponent {
+export class MyReservationComponent implements OnInit {
   #myReServer = inject(MyReservationService);
-  #router = inject(Router);
 
   page: number = 1;
   pageSize: number = 10;
@@ -100,20 +76,6 @@ export class MyReservationComponent {
       },
     );
   }
-
-  deleteReservationByGymClassId(gymClass_id: string) {
-    this.#myReServer.deleteReservationByGymClassId(gymClass_id).subscribe(
-      (res) => {
-        console.log(res);
-        window.location.reload();
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
-  }
-  updateReservation(res_id: string) {}
-  addReservation() {}
 
   protected readonly IconHelper = IconHelper;
 }

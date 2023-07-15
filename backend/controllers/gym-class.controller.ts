@@ -76,7 +76,15 @@ export const getClassById: RequestHandler<
 > = async (req, res, next) => {
   try {
     const result = await gymClassModel
-      .findOne({ _id: req.params.class_id })
+      .findOne(
+        { _id: req.params.class_id },
+        {
+          reviews: 0,
+          trainers: 0,
+          reservations: 0,
+          __v: 0,
+        },
+      )
       .lean();
     res.json({ success: true, data: result as IGymClass });
   } catch (err) {
@@ -447,7 +455,7 @@ export const addReservationByClassId: RequestHandler<
   try {
     const { tokenData } = req.body;
     const obj = {
-      _id: tokenData._id,
+      _id: new Types.ObjectId(tokenData._id),
       name: tokenData.name,
       email: tokenData.email,
     };
