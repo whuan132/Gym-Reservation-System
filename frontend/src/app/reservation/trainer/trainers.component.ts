@@ -37,36 +37,37 @@ import { AuthService } from "../../auth/auth.service";
           <div class="space-y-2 mt-4">
             <article *ngFor="let trainer of data.data">
               <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-              <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
-                  <img
-                    class="w-8 h-8 rounded-full"
-                    [src]="IconHelper.getRandomProfilePicture(trainer._id)"
-                    alt="Neil image"
-                  />
-                </div>
-                <div class="flex-1 min-w-0">
-                  <a
-                    [routerLink]="['', 'reservation', 'trainers', trainer._id]"
-                  >
+              <a [routerLink]="['', 'reservation', 'trainers', trainer._id]">
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-8 h-8 rounded-full"
+                      [src]="IconHelper.getRandomProfilePicture(trainer._id)"
+                      alt="Neil image"
+                    />
+                  </div>
+                  <div class="flex-1 min-w-0">
                     <p
                       class="text-sm font-medium text-gray-900 truncate dark:text-white"
                     >
                       {{ trainer.name }}
                     </p>
-                  </a>
-                  <p
-                    class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                  >
-                    {{ trainer.email }}
-                  </p>
-                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {{ trainer.specialization }}
-                  </p>
 
-                  <app-rating [rating]="trainer.rating" />
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ trainer.email }}
+                    </p>
+                    <p
+                      class="text-sm text-gray-500 truncate dark:text-gray-400"
+                    >
+                      {{ trainer.specialization }}
+                    </p>
+
+                    <app-rating [rating]="trainer.rating" />
+                  </div>
                 </div>
-              </div>
+              </a>
             </article>
           </div>
         </div>
