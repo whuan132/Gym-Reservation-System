@@ -9,8 +9,16 @@ import { IPageData } from "../../types/page-data.interface";
 @Component({
   selector: "app-classes",
   template: `
+    <div class="mt-20" id="addNewGymClass">
+      <button
+        *ngIf="authService.isAdmin"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        (click)="addGymClass()"
+      >
+        Add Gym Class
+      </button>
+    </div>
     <app-loading *ngIf="!gymClasses; else list" />
-
     <ng-template #list>
       <div class="mt-20 mx-auto w-full items-start md:max-w-2xl">
         <h2
@@ -55,28 +63,29 @@ import { IPageData } from "../../types/page-data.interface";
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {{ cls.description }}
                   </p>
+                  <p><b>Capacity:</b> {{ cls.capacity }}</p>
                   <p><b>StartDate:</b> {{ cls.startDate | date }}</p>
                   <p><b>EndDate:</b> {{ cls.endDate | date }}</p>
-
-                  <a
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  <button
+                    *ngIf="authService.isAdmin"
+                    type="button"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    (click)="deleteGymClass(cls._id)"
                   >
-                    Read more
-                    <svg
-                      class="w-3.5 h-3.5 ml-2"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 14 10"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9"
-                      />
-                    </svg>
+                    Delete
+                  </button>
+                  <a
+                    *ngIf="authService.isAdmin"
+                    class="focus:outline-none text-white text-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 d-flex align-items-center justify-content-center"
+                    [routerLink]="[
+                      '',
+                      'reservation',
+                      'classes',
+                      'update',
+                      cls._id
+                    ]"
+                  >
+                    Update
                   </a>
                 </div>
               </a>
