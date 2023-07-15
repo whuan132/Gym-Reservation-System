@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from "@angular/core";
 import { IPageData } from "../types/page-data.interface";
 import { ITrainer } from "../types/trainer.interface";
 import { TrainerService } from "./trainer.service";
-import { getRandomProfilePicture } from "../utils/IconHelper";
+import IconHelper from "../utils/IconHelper";
 
 @Component({
   selector: "app-trainers",
@@ -93,7 +93,7 @@ import { getRandomProfilePicture } from "../utils/IconHelper";
                 <div class="flex-shrink-0">
                   <img
                     class="w-8 h-8 rounded-full"
-                    [src]="trainer.image || getRandomProfilePicture()"
+                    [src]="IconHelper.getRandomProfilePicture(trainer._id)"
                     alt="Neil image"
                   />
                 </div>
@@ -136,7 +136,7 @@ import { getRandomProfilePicture } from "../utils/IconHelper";
                     <p
                       class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400"
                     >
-                      {{ trainer.rating }} out of 5
+                      {{ trainer.rating | number: "1.0-0" }} out of 5
                     </p>
                   </div>
                 </div>
@@ -197,5 +197,5 @@ export class TrainersComponent implements OnInit {
     await this.fetchData();
   }
 
-  protected readonly getRandomProfilePicture = getRandomProfilePicture;
+  protected readonly IconHelper = IconHelper;
 }

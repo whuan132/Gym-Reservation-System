@@ -13,7 +13,7 @@ export class AuthService {
   jwt = signal("");
   user: IUser | null = null;
 
-  bootstrapFactory() {
+  bootstrap() {
     const token = localStorage.getItem("GR-TOKEN");
     if (token) {
       this.jwt.set(token);

@@ -3,7 +3,7 @@ import { Modal, ModalOptions } from "flowbite";
 import { TrainerService } from "./trainer.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ITrainer } from "../types/trainer.interface";
-import { getRandomProfilePicture } from "../utils/IconHelper";
+import IconHelper from "../utils/IconHelper";
 
 @Component({
   selector: "app-trainer-add",
@@ -134,7 +134,7 @@ export class TrainerAddComponent {
   form = inject(FormBuilder).group({
     name: ["", Validators.required],
     email: ["", [Validators.required, Validators.email]],
-    image: [getRandomProfilePicture(), Validators.required],
+    image: [IconHelper.getRandomProfilePicture(), Validators.required],
     specialization: ["", Validators.required],
   });
 
@@ -166,7 +166,9 @@ export class TrainerAddComponent {
       this.#modal = new Modal($modalElement, modalOptions as ModalOptions);
       this.#modal._init();
     }
-    this.form.controls["image"]?.patchValue(getRandomProfilePicture());
+    this.form.controls["image"]?.patchValue(
+      IconHelper.getRandomProfilePicture(),
+    );
     this.#modal.show();
   }
 

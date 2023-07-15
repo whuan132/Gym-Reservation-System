@@ -4,7 +4,8 @@ import { TrainerService } from "./trainer.service";
 import { IReview } from "../types/review.interface";
 import { FormBuilder, Validators } from "@angular/forms";
 import { IPageData } from "../types/page-data.interface";
-import { getRandomProfilePicture } from "../utils/IconHelper";
+import IconHelper from "../utils/IconHelper";
+import { DecimalPipe } from "@angular/common";
 
 @Component({
   selector: "app-trainer-detail",
@@ -51,7 +52,7 @@ import { getRandomProfilePicture } from "../utils/IconHelper";
           <div class="flex-shrink-0">
             <img
               class="w-8 h-8 rounded-full"
-              [src]="trainer.image || getRandomProfilePicture()"
+              [src]="IconHelper.getRandomProfilePicture(trainer._id)"
               alt="Neil image"
             />
           </div>
@@ -90,7 +91,7 @@ import { getRandomProfilePicture } from "../utils/IconHelper";
               <p
                 class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400"
               >
-                {{ trainer.rating }} out of 5
+                {{ trainer.rating | number: "1.0-0" }} out of 5
               </p>
             </div>
           </div>
@@ -201,7 +202,9 @@ import { getRandomProfilePicture } from "../utils/IconHelper";
               <div class="flex items-center mb-4 space-x-4">
                 <img
                   class="w-10 h-10 rounded-full"
-                  [src]="getRandomProfilePicture()"
+                  [src]="
+                    IconHelper.getRandomProfilePicture(review.createdBy.id)
+                  "
                   alt=""
                 />
                 <div class="space-y-1 font-medium dark:text-white">
@@ -344,5 +347,6 @@ export class TrainerDetailComponent implements OnInit {
     await this.fetchReviews();
   }
 
-  protected readonly getRandomProfilePicture = getRandomProfilePicture;
+  protected readonly IconHelper = IconHelper;
+  protected readonly DecimalPipe = DecimalPipe;
 }

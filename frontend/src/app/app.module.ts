@@ -21,10 +21,14 @@ import { AuthService } from "./auth/auth.service";
 import { NgIf } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { authGuard } from "./auth/auth.guard";
+import IconHelper from "./utils/IconHelper";
 
 function bootstrap() {
   const authService = inject(AuthService);
-  return authService.bootstrapFactory.bind(authService);
+  return () => {
+    authService.bootstrap();
+    IconHelper.bootstrap();
+  };
 }
 
 const MY_ROUTES: Routes = [
