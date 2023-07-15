@@ -21,6 +21,7 @@ import { PageSelectorComponent } from "./common/page-selector.component";
 import { LoadingComponent } from "./common/loading.component";
 import { ReviewEditorComponent } from "./common/review-editor.component";
 import { ReviewListComponent } from "./common/review-list.component";
+import { ClassDetailComponent } from "./customer/class-detail.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -39,6 +40,11 @@ const MY_ROUTES: Routes = [
     path: "my",
     component: MyReservationComponent,
     title: "My Reservations",
+  },
+  {
+    path: "my/class/:class_id",
+    component: ClassDetailComponent,
+    title: "Class Detail",
   },
   { path: "trainers", component: TrainersComponent, title: "Trainers" },
   {
@@ -62,6 +68,7 @@ const MY_ROUTES: Routes = [
     LoadingComponent,
     ReviewEditorComponent,
     ReviewListComponent,
+    ClassDetailComponent,
   ],
   imports: [
     CommonModule,
