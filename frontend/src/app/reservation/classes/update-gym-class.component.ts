@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { GymClassesService } from "./gym-classes.service";
-import { IGymClass } from "../types/gym-class.interface";
+import { IGymClass } from "../../types/gym-class.interface";
 import { Router } from "@angular/router";
 
 @Component({

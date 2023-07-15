@@ -1,10 +1,10 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IGymClass } from "../types/gym-class.interface";
-import { IPageData } from "../types/page-data.interface";
-import { IResponse } from "../types/response.interface";
-import { IReview } from "../types/review.interface";
-import { ITrainer } from "../types/trainer.interface";
+import { IGymClass } from "../../types/gym-class.interface";
+import { IPageData } from "../../types/page-data.interface";
+import { IResponse } from "../../types/response.interface";
+import { IReview } from "../../types/review.interface";
+import { ITrainer } from "../../types/trainer.interface";
 
 @Injectable({
   providedIn: "root",

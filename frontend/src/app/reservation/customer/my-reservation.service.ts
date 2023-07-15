@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IGymClass } from "../types/gym-class.interface";
-import { IPageData } from "../types/page-data.interface";
+import { IGymClass } from "../../types/gym-class.interface";
+import { IPageData } from "../../types/page-data.interface";
 
 @Injectable({
   providedIn: "root",

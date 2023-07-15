@@ -1,9 +1,9 @@
 import { Component, inject } from "@angular/core";
 import { MyReservationService } from "./my-reservation.service";
 import { Router } from "@angular/router";
-import { IGymClass } from "../types/gym-class.interface";
-import { IPageData } from "../types/page-data.interface";
-import IconHelper from "../utils/IconHelper";
+import { IGymClass } from "../../types/gym-class.interface";
+import { IPageData } from "../../types/page-data.interface";
+import IconHelper from "../../utils/IconHelper";
 
 @Component({
   selector: "app-my-reservation",

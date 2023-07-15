@@ -1,8 +1,8 @@
 import { Component, inject } from "@angular/core";
 import { GymClassesService } from "./gym-classes.service";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
-import { IGymClass } from "../types/gym-class.interface";
+import { IGymClass } from "../../types/gym-class.interface";
 
 @Component({
   selector: "app-add-gym-class",

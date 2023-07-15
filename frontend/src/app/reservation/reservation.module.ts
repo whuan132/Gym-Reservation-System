@@ -6,14 +6,14 @@ import {
   NgOptimizedImage,
   TitleCasePipe,
 } from "@angular/common";
-import { ClassesComponent } from "./classes.component";
-import { MyReservationComponent } from "./my-reservation.component";
+import { ClassesComponent } from "./classes/classes.component";
+import { MyReservationComponent } from "./customer/my-reservation.component";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { GymClassesService } from "./gym-classes.service";
+import { GymClassesService } from "./classes/gym-classes.service";
 import { TrainersComponent } from "./trainer/trainers.component";
-import { AddGymClassComponent } from "./add-gym-class.component";
-import { UpdateGymClassComponent } from "./update-gym-class.component";
+import { AddGymClassComponent } from "./classes/add-gym-class.component";
+import { UpdateGymClassComponent } from "./classes/update-gym-class.component";
 import { TrainerAddComponent } from "./trainer/trainer-add.component";
 import { TrainerDetailComponent } from "./trainer/trainer-detail.component";
 import { RatingComponent } from "./common/rating.component";
@@ -21,7 +21,7 @@ import { PageSelectorComponent } from "./common/page-selector.component";
 import { LoadingComponent } from "./common/loading.component";
 import { ReviewEditorComponent } from "./common/review-editor.component";
 import { ReviewListComponent } from "./common/review-list.component";
-import { ClassDetailComponent } from "./customer/class-detail.component";
+import { ClassDetailComponent } from "./classes/class-detail.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },

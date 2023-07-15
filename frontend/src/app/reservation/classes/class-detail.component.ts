@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from "@angular/core";
 import { IGymClass } from "../../types/gym-class.interface";
-import { GymClassesService } from "../gym-classes.service";
+import { GymClassesService } from "./gym-classes.service";
 import { IReview } from "../../types/review.interface";
 import { IPageData } from "../../types/page-data.interface";
 import IconHelper from "../../utils/IconHelper";
