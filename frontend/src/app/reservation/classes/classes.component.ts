@@ -55,6 +55,8 @@ import { IPageData } from "../../types/page-data.interface";
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {{ cls.description }}
                   </p>
+                  <p><b>StartDate:</b> {{ cls.startDate | date }}</p>
+                  <p><b>EndDate:</b> {{ cls.endDate | date }}</p>
 
                   <a
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -83,65 +85,6 @@ import { IPageData } from "../../types/page-data.interface";
         </div>
       </div>
     </ng-template>
-    <!--    -->
-    <!--    <div class="mt-20" id="addNewGymClass">-->
-    <!--      <button-->
-    <!--        *ngIf="authService.isAdmin"-->
-    <!--        class="btn btn-outline btn-accent"-->
-    <!--        (click)="addGymClass()"-->
-    <!--      >-->
-    <!--        Add Gym Class-->
-    <!--      </button>-->
-    <!--    </div>-->
-    <!--    <div-->
-    <!--      class="flex flex-col items-center  px-6 py-8 mx-auto md:h-screen lg:py-0"-->
-    <!--    >-->
-    <!--      <div-->
-    <!--        class="card shadow-lg compact side bg-base-100 m-2"-->
-    <!--        *ngFor="let gymClass of gymClasses"-->
-    <!--      >-->
-    <!--        <div class="flex-none w-48 relative">-->
-    <!--          <img-->
-    <!--            src="your_image_source"-->
-    <!--            alt=""-->
-    <!--            class="absolute inset-0 w-full h-full object-cover"-->
-    <!--          />-->
-    <!--        </div>-->
-    <!--        <div class="card-body">-->
-    <!--          <h2 class="card-title">{{ gymClass.name }}</h2>-->
-    <!--          <p>{{ gymClass.description }}</p>-->
-    <!--          <div class="divider"></div>-->
-    <!--          <div class="prose prose-sm">-->
-    <!--            <p><b>Capacity:</b> {{ gymClass.capacity }}</p>-->
-    <!--            <p><b>Rating:</b> {{ gymClass.rating }}</p>-->
-    <!--            <p><b>StartDate:</b> {{ gymClass.startDate | date }}</p>-->
-    <!--            <p><b>EndDate:</b> {{ gymClass.endDate | date }}</p>-->
-    <!--          </div>-->
-    <!--          <div class="justify-end card-actions">-->
-    <!--            <button-->
-    <!--              *ngIf="authService.isAdmin"-->
-    <!--              class="btn btn-outline btn-accent"-->
-    <!--              (click)="deleteGymClass(gymClass._id)"-->
-    <!--            >-->
-    <!--              Delete-->
-    <!--            </button>-->
-    <!--            <a-->
-    <!--              *ngIf="authService.isAdmin"-->
-    <!--              class="btn btn-outline btn-accent"-->
-    <!--              [routerLink]="[-->
-    <!--                '',-->
-    <!--                'reservation',-->
-    <!--                'classes',-->
-    <!--                'update',-->
-    <!--                gymClass._id-->
-    <!--              ]"-->
-    <!--            >-->
-    <!--              Update-->
-    <!--            </a>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
   `,
   styles: [],
 })
