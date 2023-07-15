@@ -98,111 +98,6 @@ import { IPageData } from "../types/page-data.interface";
           </div>
         </div>
 
-        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <div
-          *ngIf="!reviews?.data?.length"
-          class="my-36 text-xl text-gray-600 flex justify-center"
-        >
-          <p>DO NOT HAVE ANY REVIEW NOW.</p>
-        </div>
-
-        <div *ngIf="reviews?.data?.length">
-          <div class="space-y-2 mt-4">
-            <article *ngFor="let review of reviews?.data">
-              <div class="flex items-center mb-4 space-x-4">
-                <img
-                  class="w-10 h-10 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  alt=""
-                />
-                <div class="space-y-1 font-medium dark:text-white">
-                  <p>
-                    {{ review.createdBy.name
-                    }}<span
-                      class="block text-sm text-gray-500 dark:text-gray-400"
-                      >{{ review.createdBy.email }}</span
-                    >
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-center mb-1">
-                <svg
-                  *ngFor="let i of getRange(5)"
-                  [ngClass]="
-                    i <= review.rating
-                      ? 'w-4 h-4 text-yellow-300 mr-1'
-                      : 'w-4 h-4 text-gray-300 mr-1 dark:text-gray-500'
-                  "
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 22 20"
-                >
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
-                  />
-                </svg>
-                <p
-                  class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400"
-                >
-                  {{ review.rating }} out of 5
-                </p>
-              </div>
-
-              <p class="mb-2 text-gray-500 dark:text-gray-400">
-                {{ review.comment }}
-              </p>
-
-              <aside>
-                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                  Created at {{ review.createdAt | date }}
-                </p>
-              </aside>
-
-              <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-            </article>
-          </div>
-
-          <nav aria-label="Page navigation example" class="mt-4">
-            <ul class="inline-flex -space-x-px text-sm">
-              <li>
-                <a
-                  style="cursor: pointer;"
-                  class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  (click)="goPage(page - 1)"
-                  >Prev</a
-                >
-              </li>
-              <li *ngFor="let p of getRange(totalPages); index as i">
-                <a
-                  *ngIf="i + 1 !== page"
-                  (click)="goPage(i + 1)"
-                  style="cursor: pointer;"
-                  class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >{{ i + 1 }}</a
-                >
-                <a
-                  *ngIf="i + 1 === page"
-                  (click)="goPage(i + 1)"
-                  style="cursor: pointer;"
-                  aria-current="page"
-                  class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                  >{{ i + 1 }}</a
-                >
-              </li>
-              <li>
-                <a
-                  style="cursor: pointer;"
-                  class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  (click)="goPage(page + 1)"
-                  >Next</a
-                >
-              </li>
-            </ul>
-          </nav>
-        </div>
-
         <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="mt-4">
           <label
             for="rating"
@@ -254,6 +149,109 @@ import { IPageData } from "../types/page-data.interface";
             </button>
           </div>
         </form>
+
+        <div
+          *ngIf="!reviews?.data?.length"
+          class="my-36 text-xl text-gray-600 flex justify-center"
+        >
+          <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+          <p>DO NOT HAVE ANY REVIEW NOW.</p>
+        </div>
+
+        <div *ngIf="reviews?.data?.length">
+          <nav aria-label="Page navigation example" class="flex justify-end">
+            <ul class="inline-flex -space-x-px text-sm">
+              <li>
+                <a
+                  style="cursor: pointer;"
+                  class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  (click)="goPage(page - 1)"
+                  >Prev</a
+                >
+              </li>
+              <li *ngFor="let p of getRange(totalPages); index as i">
+                <a
+                  *ngIf="i + 1 !== page"
+                  (click)="goPage(i + 1)"
+                  style="cursor: pointer;"
+                  class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  >{{ i + 1 }}</a
+                >
+                <a
+                  *ngIf="i + 1 === page"
+                  (click)="goPage(i + 1)"
+                  style="cursor: pointer;"
+                  aria-current="page"
+                  class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                  >{{ i + 1 }}</a
+                >
+              </li>
+              <li>
+                <a
+                  style="cursor: pointer;"
+                  class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  (click)="goPage(page + 1)"
+                  >Next</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="space-y-2 mt-4">
+            <article *ngFor="let review of reviews?.data">
+              <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+              <div class="flex items-center mb-4 space-x-4">
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  alt=""
+                />
+                <div class="space-y-1 font-medium dark:text-white">
+                  <p>
+                    {{ review.createdBy.name
+                    }}<span
+                      class="block text-sm text-gray-500 dark:text-gray-400"
+                      >{{ review.createdBy.email }}</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center mb-1">
+                <svg
+                  *ngFor="let i of getRange(5)"
+                  [ngClass]="
+                    i <= review.rating
+                      ? 'w-4 h-4 text-yellow-300 mr-1'
+                      : 'w-4 h-4 text-gray-300 mr-1 dark:text-gray-500'
+                  "
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                  />
+                </svg>
+                <p
+                  class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400"
+                >
+                  {{ review.rating }} out of 5
+                </p>
+              </div>
+
+              <p class="mb-2 text-gray-500 dark:text-gray-400">
+                {{ review.comment }}
+              </p>
+
+              <aside>
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Created at {{ review.createdAt | date }}
+                </p>
+              </aside>
+            </article>
+          </div>
+        </div>
       </div>
     </ng-template>
   `,
