@@ -1,9 +1,9 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IPageData } from "../types/page-data.interface";
-import { ITrainer } from "../types/trainer.interface";
-import { IResponse } from "../types/response.interface";
-import { IReview } from "../types/review.interface";
+import { IPageData } from "../../types/page-data.interface";
+import { ITrainer } from "../../types/trainer.interface";
+import { IResponse } from "../../types/response.interface";
+import { IReview } from "../../types/review.interface";
 
 @Injectable({
   providedIn: "root",

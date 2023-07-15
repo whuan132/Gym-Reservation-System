@@ -2,8 +2,8 @@ import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { Modal, ModalOptions } from "flowbite";
 import { TrainerService } from "./trainer.service";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ITrainer } from "../types/trainer.interface";
-import IconHelper from "../utils/IconHelper";
+import { ITrainer } from "../../types/trainer.interface";
+import IconHelper from "../../utils/IconHelper";
 
 @Component({
   selector: "app-trainer-add",

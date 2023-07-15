@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from "@angular/core";
-import { IPageData } from "../types/page-data.interface";
-import { ITrainer } from "../types/trainer.interface";
+import { IPageData } from "../../types/page-data.interface";
+import { ITrainer } from "../../types/trainer.interface";
 import { TrainerService } from "./trainer.service";
-import IconHelper from "../utils/IconHelper";
+import IconHelper from "../../utils/IconHelper";
 
 @Component({
   selector: "app-trainers",

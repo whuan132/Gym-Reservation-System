@@ -1,18 +1,26 @@
 import { NgModule } from "@angular/core";
-import { CommonModule, NgForOf, NgIf, TitleCasePipe } from "@angular/common";
+import {
+  CommonModule,
+  NgForOf,
+  NgIf,
+  NgOptimizedImage,
+  TitleCasePipe,
+} from "@angular/common";
 import { ClassesComponent } from "./classes.component";
 import { MyReservationComponent } from "./my-reservation.component";
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GymClassesService } from "./gym-classes.service";
-import { TrainersComponent } from "./trainers.component";
+import { TrainersComponent } from "./trainer/trainers.component";
 import { AddGymClassComponent } from "./add-gym-class.component";
 import { UpdateGymClassComponent } from "./update-gym-class.component";
-import { TrainerAddComponent } from "./trainer-add.component";
-import { TrainerDetailComponent } from "./trainer-detail.component";
-import { RatingComponent } from './common/rating.component';
-import { PageSelectorComponent } from './common/page-selector.component';
-import { LoadingComponent } from './common/loading.component';
+import { TrainerAddComponent } from "./trainer/trainer-add.component";
+import { TrainerDetailComponent } from "./trainer/trainer-detail.component";
+import { RatingComponent } from "./common/rating.component";
+import { PageSelectorComponent } from "./common/page-selector.component";
+import { LoadingComponent } from "./common/loading.component";
+import { ReviewEditorComponent } from "./common/review-editor.component";
+import { ReviewListComponent } from "./common/review-list.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -52,6 +60,8 @@ const MY_ROUTES: Routes = [
     RatingComponent,
     PageSelectorComponent,
     LoadingComponent,
+    ReviewEditorComponent,
+    ReviewListComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +74,7 @@ const MY_ROUTES: Routes = [
     NgIf,
     TitleCasePipe,
     NgForOf,
+    NgOptimizedImage,
   ],
   providers: [GymClassesService],
   exports: [RouterModule],
