@@ -181,6 +181,7 @@ export const getReviewsByTrainerId: RequestHandler<
           $facet: {
             data: [
               { $match: {} },
+              { $sort: { createdAt: -1 } },
               { $skip: (page - 1) * page_size },
               { $limit: page_size },
             ],
