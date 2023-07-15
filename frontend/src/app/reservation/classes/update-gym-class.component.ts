@@ -7,34 +7,71 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-update-gym-class",
   template: `
-    <div class="mt-20"></div>
-    <h1>update-gym-class works!</h1>
-    <form [formGroup]="form" (ngSubmit)="go()">
-      <label> Name: <input placeholder="name" formControlName="name" /> </label>
-      <label>
-        Description:
-        <input placeholder="description" formControlName="description" />
-      </label>
-      <label>
-        Capacity:
-        <input placeholder="capacity" formControlName="capacity" />
-      </label>
-      <label>
-        Rating: <input placeholder="rating" formControlName="rating" />
-      </label>
-      <label>
-        StartDate:
+    <form class="mt-20" [formGroup]="form" (ngSubmit)="go()">
+      <div class="mb-6">
+        <label
+          for="name"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >name</label
+        >
         <input
-          type="date"
-          placeholder="startDate"
-          formControlName="startDate"
+          type="name"
+          formControlName="name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="name"
+          required
         />
-      </label>
-      <label>
-        EndDate:
-        <input type="date" placeholder="endDate" formControlName="endDate" />
-      </label>
-      <button type="submit">Update GymClass</button>
+      </div>
+      <div class="mb-6">
+        <label
+          for="description"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >description</label
+        >
+        <input
+          type="description"
+          formControlName="description"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="description"
+          required
+        />
+      </div>
+      <div class="mb-6">
+        <label
+          for="capacity"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >capacity</label
+        >
+        <input
+          type="capacity"
+          formControlName="capacity"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="capacity"
+          required
+        />
+      </div>
+      <div class="mb-6">
+        <label>
+          StartDate:
+          <input
+            type="date"
+            placeholder="startDate"
+            formControlName="startDate"
+          />
+        </label>
+      </div>
+      <div class="mb-6">
+        <label>
+          EndDate:
+          <input type="date" placeholder="endDate" formControlName="endDate" />
+        </label>
+      </div>
+      <button
+        type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        Update Class
+      </button>
     </form>
   `,
   styles: [],
