@@ -10,6 +10,9 @@ import { AddGymClassComponent } from "./add-gym-class.component";
 import { UpdateGymClassComponent } from "./update-gym-class.component";
 import { TrainerAddComponent } from "./trainer-add.component";
 import { TrainerDetailComponent } from "./trainer-detail.component";
+import { RatingComponent } from './common/rating.component';
+import { PageSelectorComponent } from './common/page-selector.component';
+import { LoadingComponent } from './common/loading.component';
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -46,6 +49,9 @@ const MY_ROUTES: Routes = [
     TrainersComponent,
     TrainerAddComponent,
     TrainerDetailComponent,
+    RatingComponent,
+    PageSelectorComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
