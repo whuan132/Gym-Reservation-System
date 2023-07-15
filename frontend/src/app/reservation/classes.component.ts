@@ -37,8 +37,8 @@ import { Router } from "@angular/router";
           <div class="prose prose-sm">
             <p><b>Capacity:</b> {{ gymClass.capacity }}</p>
             <p><b>Rating:</b> {{ gymClass.rating }}</p>
-            <p><b>StartDate:</b> {{ gymClass.startDate }}</p>
-            <p><b>EndDate:</b> {{ gymClass.endDate }}</p>
+            <p><b>StartDate:</b> {{ gymClass.startDate | date }}</p>
+            <p><b>EndDate:</b> {{ gymClass.endDate | date }}</p>
           </div>
           <div class="justify-end card-actions">
             <button

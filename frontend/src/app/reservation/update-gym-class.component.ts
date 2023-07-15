@@ -51,9 +51,20 @@ export class UpdateGymClassComponent implements OnInit {
     description: ["", Validators.required],
     capacity: [1, Validators.required],
     rating: [0, Validators.required],
-    startDate: [new Date(), Validators.required],
-    endDate: [new Date(), Validators.required],
+    startDate: [this.formatDate(new Date()), Validators.required],
+    endDate: [this.formatDate(new Date()), Validators.required],
   });
+
+  formatDate(date: Date): string {
+    let month = "" + (date.getMonth() + 1),
+      day = "" + date.getDate(),
+      year = date.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
 
   ngOnInit() {
     this.#classService.getGymClass(this.class_id).subscribe((res) => {
@@ -63,19 +74,27 @@ export class UpdateGymClassComponent implements OnInit {
         this.form.get("description")?.patchValue(res.data.description);
         this.form.get("capacity")?.patchValue(res.data.capacity);
         this.form.get("rating")?.patchValue(res.data.rating);
-        this.form.get("startDate")?.patchValue(res.data.startDate);
-        this.form.get("endDate")?.patchValue(res.data.endDate);
+        this.form
+          .get("startDate")
+          ?.patchValue(this.formatDate(new Date(res.data.startDate)));
+        this.form
+          .get("endDate")
+          ?.patchValue(this.formatDate(new Date(res.data.endDate)));
       }
     });
   }
 
   go() {
-    this.#classService
-      .updateGymClass(this.class_id, this.form.value as IGymClass)
-      .subscribe((res) => {
-        if (res.success) {
-          this.#router.navigate(["", "reservation", "classes"]);
-        }
-      });
+    const formValue = this.form.value;
+    const obj = {
+      ...formValue,
+      startDate: new Date(formValue.startDate as string),
+      endDate: new Date(formValue.endDate as string),
+    } as IGymClass;
+    this.#classService.updateGymClass(this.class_id, obj).subscribe((res) => {
+      if (res.success) {
+        this.#router.navigate(["", "reservation", "classes"]);
+      }
+    });
   }
 }
