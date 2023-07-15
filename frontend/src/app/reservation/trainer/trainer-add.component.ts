@@ -8,34 +8,36 @@ import IconHelper from "../../utils/IconHelper";
 @Component({
   selector: "app-trainer-add",
   template: `
-    <div class="relative">
-      <div class="absolute -right-5 -bottom-15">
-        <!-- Modal toggle -->
-        <button
-          (click)="showModal()"
-          data-modal-target="member-modal"
-          type="button"
-          aria-expanded="false"
-          class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+    <div
+      class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600 -mb-12"
+    >
+      <button
+        (click)="showModal()"
+        data-modal-target="member-modal"
+        type="button"
+        aria-expanded="false"
+        class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        <svg
+          class="w-5 h-5 mr-2"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 10"
         >
-          <svg
-            aria-hidden="true"
-            class="w-8 h-8 transition-transform group-hover:rotate-45"
-            fill="none"
+          <path
             stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
-          </svg>
-        </button>
-      </div>
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 5h12m0 0L9 1m4 4L9 9"
+          />
+        </svg>
+        Add a new trainer
+      </button>
+    </div>
 
+    <div class="relative">
       <div>
         <!-- Main modal -->
         <div
@@ -113,7 +115,7 @@ import IconHelper from "../../utils/IconHelper";
                   </div>
                   <button
                     type="submit"
-                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     data-modal-hide="member-modal"
                   >
                     Submit

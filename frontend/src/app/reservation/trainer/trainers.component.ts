@@ -20,6 +20,11 @@ import { AuthService } from "../../auth/auth.service";
           Trainers
         </h2>
 
+        <app-trainer-add
+          *ngIf="authService.isAdmin"
+          (add)="onAddTrainer($event)"
+        />
+
         <div
           *ngIf="!data?.data?.length"
           class="my-36 text-xl text-gray-600 flex justify-center"
@@ -71,11 +76,6 @@ import { AuthService } from "../../auth/auth.service";
             </article>
           </div>
         </div>
-
-        <app-trainer-add
-          *ngIf="authService.isAdmin"
-          (add)="onAddTrainer($event)"
-        />
       </div>
     </ng-template>
   `,
