@@ -9,6 +9,7 @@ import { TrainersComponent } from "./trainers.component";
 import { AddGymClassComponent } from "./add-gym-class.component";
 import { UpdateGymClassComponent } from "./update-gym-class.component";
 import { TrainerAddComponent } from "./trainer-add.component";
+import { TrainerDetailComponent } from "./trainer-detail.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -29,6 +30,11 @@ const MY_ROUTES: Routes = [
     title: "My Reservations",
   },
   { path: "trainers", component: TrainersComponent, title: "Trainers" },
+  {
+    path: "trainers/:trainer_id",
+    component: TrainerDetailComponent,
+    title: "Trainer Detail",
+  },
 ];
 
 @NgModule({
@@ -39,6 +45,7 @@ const MY_ROUTES: Routes = [
     UpdateGymClassComponent,
     TrainersComponent,
     TrainerAddComponent,
+    TrainerDetailComponent,
   ],
   imports: [
     CommonModule,

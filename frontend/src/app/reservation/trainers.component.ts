@@ -34,7 +34,7 @@ import { TrainerService } from "./trainer.service";
     <ng-template #list>
       <div class="mt-20 mx-auto w-full items-start md:max-w-2xl">
         <h2
-          class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white"
+          class="mb-4 flex items-center text-5xl font-extrabold dark:text-white"
         >
           Trainers
         </h2>
@@ -61,11 +61,15 @@ import { TrainerService } from "./trainer.service";
                   />
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p
-                    class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                  <a
+                    [routerLink]="['', 'reservation', 'trainers', trainer._id]"
                   >
-                    {{ trainer.name }}
-                  </p>
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ trainer.name }}
+                    </p>
+                  </a>
                   <p
                     class="text-sm font-medium text-gray-900 truncate dark:text-white"
                   >
@@ -189,7 +193,8 @@ export class TrainersComponent implements OnInit {
     await this.fetchData();
   }
 
-  onAddTrainer(obj: ITrainer) {
+  async onAddTrainer(obj: ITrainer) {
     this.data.data.push(obj);
+    await this.fetchData();
   }
 }
