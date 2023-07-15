@@ -3,6 +3,7 @@ import { IPageData } from "../../types/page-data.interface";
 import { ITrainer } from "../../types/trainer.interface";
 import { TrainerService } from "./trainer.service";
 import IconHelper from "../../utils/IconHelper";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-trainers",
@@ -70,7 +71,10 @@ import IconHelper from "../../utils/IconHelper";
           </div>
         </div>
 
-        <app-trainer-add (add)="onAddTrainer($event)" />
+        <app-trainer-add
+          *ngIf="authService.isAdmin"
+          (add)="onAddTrainer($event)"
+        />
       </div>
     </ng-template>
   `,
@@ -82,6 +86,7 @@ export class TrainersComponent implements OnInit {
   totalPages: number = 1;
   data!: IPageData<ITrainer>;
 
+  authService = inject(AuthService);
   #trainerService = inject(TrainerService);
 
   async ngOnInit() {
