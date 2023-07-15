@@ -24,7 +24,7 @@ export const getReservations: RequestHandler<
     ];
     const result = await gymClassModel
       .aggregate([
-        { $match: { "reservations.email": tokenData.email } },
+        { $match: { "reservations._id": new Types.ObjectId(tokenData._id) } },
         { $project: { reviews: 0, trainers: 0, reservations: 0, __v: 0 } },
         {
           $facet: {
@@ -77,7 +77,7 @@ export const addReservation: RequestHandler<
       name: req.body.name,
       email: req.body.email,
     };
-    const results = await gymClassModel.updateOne(
+    await gymClassModel.updateOne(
       {
         _id: req.params.gymclass_id,
       },
