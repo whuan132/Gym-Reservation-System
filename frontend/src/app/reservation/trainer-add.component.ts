@@ -3,6 +3,7 @@ import { Modal, ModalOptions } from "flowbite";
 import { TrainerService } from "./trainer.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ITrainer } from "../types/trainer.interface";
+import { getRandomProfilePicture } from "../utils/IconHelper";
 
 @Component({
   selector: "app-trainer-add",
@@ -133,10 +134,7 @@ export class TrainerAddComponent {
   form = inject(FormBuilder).group({
     name: ["", Validators.required],
     email: ["", [Validators.required, Validators.email]],
-    image: [
-      "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
-      Validators.required,
-    ],
+    image: [getRandomProfilePicture(), Validators.required],
     specialization: ["", Validators.required],
   });
 
@@ -148,24 +146,27 @@ export class TrainerAddComponent {
       "#member-modal",
     ) as HTMLElement;
 
-    const modalOptions = {
-      placement: "center",
-      backdrop: "dynamic",
-      backdropClasses:
-        "bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40",
-      onHide: () => {
-        console.log("modal is hidden");
-      },
-      onShow: () => {
-        console.log("modal is shown");
-      },
-      onToggle: () => {
-        console.log("modal has been toggled");
-      },
-    };
+    if (!this.#modal) {
+      const modalOptions = {
+        placement: "center",
+        backdrop: "dynamic",
+        backdropClasses:
+          "bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40",
+        onHide: () => {
+          console.log("modal is hidden");
+        },
+        onShow: () => {
+          console.log("modal is shown");
+        },
+        onToggle: () => {
+          console.log("modal has been toggled");
+        },
+      };
 
-    this.#modal = new Modal($modalElement, modalOptions as ModalOptions);
-    this.#modal._init();
+      this.#modal = new Modal($modalElement, modalOptions as ModalOptions);
+      this.#modal._init();
+    }
+    this.form.controls["image"]?.patchValue(getRandomProfilePicture());
     this.#modal.show();
   }
 

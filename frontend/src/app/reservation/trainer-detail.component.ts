@@ -4,6 +4,7 @@ import { TrainerService } from "./trainer.service";
 import { IReview } from "../types/review.interface";
 import { FormBuilder, Validators } from "@angular/forms";
 import { IPageData } from "../types/page-data.interface";
+import { getRandomProfilePicture } from "../utils/IconHelper";
 
 @Component({
   selector: "app-trainer-detail",
@@ -50,10 +51,7 @@ import { IPageData } from "../types/page-data.interface";
           <div class="flex-shrink-0">
             <img
               class="w-8 h-8 rounded-full"
-              [src]="
-                trainer.image ||
-                'https://flowbite.com/docs/images/people/profile-picture-1.jpg'
-              "
+              [src]="trainer.image || getRandomProfilePicture()"
               alt="Neil image"
             />
           </div>
@@ -203,7 +201,7 @@ import { IPageData } from "../types/page-data.interface";
               <div class="flex items-center mb-4 space-x-4">
                 <img
                   class="w-10 h-10 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  [src]="getRandomProfilePicture()"
                   alt=""
                 />
                 <div class="space-y-1 font-medium dark:text-white">
@@ -345,4 +343,6 @@ export class TrainerDetailComponent implements OnInit {
     this.page = page;
     await this.fetchReviews();
   }
+
+  protected readonly getRandomProfilePicture = getRandomProfilePicture;
 }

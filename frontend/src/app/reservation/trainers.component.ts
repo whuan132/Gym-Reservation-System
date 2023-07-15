@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from "@angular/core";
 import { IPageData } from "../types/page-data.interface";
 import { ITrainer } from "../types/trainer.interface";
 import { TrainerService } from "./trainer.service";
+import { getRandomProfilePicture } from "../utils/IconHelper";
 
 @Component({
   selector: "app-trainers",
@@ -92,10 +93,7 @@ import { TrainerService } from "./trainer.service";
                 <div class="flex-shrink-0">
                   <img
                     class="w-8 h-8 rounded-full"
-                    [src]="
-                      trainer.image ||
-                      'https://flowbite.com/docs/images/people/profile-picture-1.jpg'
-                    "
+                    [src]="trainer.image || getRandomProfilePicture()"
                     alt="Neil image"
                   />
                 </div>
@@ -198,4 +196,6 @@ export class TrainersComponent implements OnInit {
     this.data.data.push(obj);
     await this.fetchData();
   }
+
+  protected readonly getRandomProfilePicture = getRandomProfilePicture;
 }
