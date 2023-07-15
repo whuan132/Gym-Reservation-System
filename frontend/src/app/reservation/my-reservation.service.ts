@@ -17,4 +17,9 @@ export class MyReservationService {
       `${this.#api}/customer/reservations/?page=${page}&page_size=${page_size}`,
     );
   }
+  deleteReservationByGymClassId(cls_id: string) {
+    return this.#http.delete<{ success: boolean; data: number }>(
+      `${this.#api}/customer/reservations/${cls_id}`,
+    );
+  }
 }

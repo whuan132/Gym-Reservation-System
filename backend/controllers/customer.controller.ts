@@ -89,3 +89,32 @@ export const addReservation: RequestHandler<
     next(error);
   }
 };
+
+export const deleteReservationByGymClassId: RequestHandler<
+  { gymClass_id: string },
+  DataResponse<number>,
+  { tokenData: TokenData }
+> = async (req, res, next) => {
+  try {
+    const { tokenData } = req.body;
+    console.log("re " + req.params.gymClass_id);
+    console.log(JSON.stringify(tokenData));
+    const results = await gymClassModel.updateOne(
+      {
+        _id: req.params.gymClass_id,
+        "reservations.email": tokenData.email,
+      },
+      {
+        $pull: {
+          reservations: {
+            email: tokenData.email,
+          },
+        },
+      },
+    );
+    console.log("results：" + JSON.stringify(results));
+    res.json({ success: true, data: results.modifiedCount });
+  } catch (error) {
+    next(error);
+  }
+};

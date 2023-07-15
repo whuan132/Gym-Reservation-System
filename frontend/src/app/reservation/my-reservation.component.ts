@@ -10,15 +10,15 @@ import { IGymClass } from "../types/gym-class.interface";
       <!--      <h3>Reservation List</h3>-->
       <div *ngIf="gymClasses">
         <ul>
-          <li *ngFor="let reservation of gymClasses">
-            {{ reservation.name | titlecase }}
+          <li *ngFor="let cls of gymClasses">
+            {{ cls.name | titlecase }}
             <button
-              (click)="deleteReservation(reservation._id)"
+              (click)="deleteReservationByGymClassId(cls._id)"
               style="padding-right: 10px;"
             >
               Delete
             </button>
-            <button (click)="updateReservation(reservation._id)">Update</button>
+            <button (click)="updateReservation(cls._id)">Update</button>
           </li>
         </ul>
         <br />
@@ -86,7 +86,17 @@ export class MyReservationComponent {
     );
   }
 
-  deleteReservation(res_id: string) {}
+  deleteReservationByGymClassId(gymClass_id: string) {
+    this.#myReServer.deleteReservationByGymClassId(gymClass_id).subscribe(
+      (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+      (error) => {
+        console.error(error);
+      },
+    );
+  }
   updateReservation(res_id: string) {}
   addReservation() {}
 }
