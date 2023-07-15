@@ -57,6 +57,7 @@ const MY_ROUTES: Routes = [
     NgForOf,
     NgIf,
     TitleCasePipe,
+    NgForOf,
   ],
   providers: [GymClassesService],
   exports: [RouterModule],

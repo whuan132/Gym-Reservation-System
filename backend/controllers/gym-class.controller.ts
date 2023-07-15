@@ -76,7 +76,7 @@ export const getClassById: RequestHandler<
 > = async (req, res, next) => {
   try {
     const result = await gymClassModel
-      .findOne({ _id: req.params.class_id }, { reservations: 0 })
+      .findOne({ _id: req.params.class_id })
       .lean();
     res.json({ success: true, data: result as IGymClass });
   } catch (err) {

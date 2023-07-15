@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { DataResponse } from "../types/DataResponse";
 import gymClassModel, { IGymClass } from "../models/gym-class.model";
 import { TokenData } from "../types/TokenData";
+import { Types } from "mongoose";
 
 export const getReservations: RequestHandler<
   {},
@@ -63,5 +64,28 @@ export const getReservations: RequestHandler<
     });
   } catch (err) {
     next(err);
+  }
+};
+export const addReservation: RequestHandler<
+  { gymclass_id: string },
+  DataResponse<string>,
+  { name: string; email: string } & TokenData
+> = async (req, res, next) => {
+  try {
+    const new_reservation = {
+      _id: new Types.ObjectId(),
+      name: req.body.name,
+      email: req.body.email,
+    };
+    const results = await gymClassModel.updateOne(
+      {
+        _id: req.params.gymclass_id,
+      },
+      { $push: { reservations: new_reservation } },
+    );
+    // console.log("results：" + JSON.stringify(results));
+    res.json({ success: true, data: new_reservation._id.toString() });
+  } catch (error) {
+    next(error);
   }
 };
