@@ -5,6 +5,7 @@ import { IPageData } from "../../types/page-data.interface";
 import { IResponse } from "../../types/response.interface";
 import { IReview } from "../../types/review.interface";
 import { ITrainer } from "../../types/trainer.interface";
+import { IReservation } from "../../types/reservation.interface";
 
 @Injectable({
   providedIn: "root",
@@ -62,6 +63,20 @@ export class GymClassesService {
   getTrainers(class_id: string) {
     return this.#http.get<IResponse<ITrainer[]>>(
       `${this.#serviceUrl}/classes/${class_id}/trainers/`,
+    );
+  }
+
+  addReservation(class_id: string) {
+    return this.#http.post<IResponse<number>>(
+      `${this.#serviceUrl}/classes/${class_id}/reservations/`,
+      {},
+    );
+  }
+
+  getReservations(class_id: string, page: number = 1, pageSize: number = 1000) {
+    return this.#http.get<IResponse<IPageData<IReservation>>>(
+      `${this.#serviceUrl}/classes/${class_id}/reservations/`,
+      {},
     );
   }
 }

@@ -5,6 +5,9 @@ import { IReview } from "../../types/review.interface";
 import { IPageData } from "../../types/page-data.interface";
 import IconHelper from "../../utils/IconHelper";
 import { ITrainer } from "../../types/trainer.interface";
+import { IReservation } from "../../types/reservation.interface";
+import { AuthService } from "../../auth/auth.service";
+import { MyReservationService } from "../customer/my-reservation.service";
 
 @Component({
   selector: "app-class-detail",
@@ -41,9 +44,9 @@ import { ITrainer } from "../../types/trainer.interface";
           >{{ clsData.startDate | date }} - {{ clsData.endDate | date }}</time
         >
 
-        <div class="space-y-2 mt-4">
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+        <div class="flex flex-row space-x-8 mt-4">
           <div *ngFor="let trainer of trainers">
-            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
             <div class="flex items-center space-x-4">
               <div class="flex-shrink-0">
                 <img
@@ -60,15 +63,51 @@ import { ITrainer } from "../../types/trainer.interface";
                     {{ trainer.name }}
                   </p>
                 </a>
-                <p
-                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                >
-                  {{ trainer.email }}
-                </p>
-                <app-rating [rating]="trainer.rating" />
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="mt-4">
+          <button
+            (click)="onBooking()"
+            [ngClass]="
+              isBooked
+                ? 'text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'
+                : 'text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'
+            "
+            class="inline-flex items-center"
+          >
+            <svg
+              class="w-5 h-5 mr-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                *ngIf="isBooked"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 5H1m0 0 4 4M1 5l4-4"
+              />
+              <path
+                *ngIf="!isBooked"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 5h12m0 0L9 1m4 4L9 9"
+              />
+            </svg>
+            {{
+              isBooked
+                ? "Remove from my reservations"
+                : "Add to my reservations"
+            }}
+          </button>
         </div>
 
         <app-review-editor (postComment)="onPostComment($event)" />
@@ -83,17 +122,29 @@ export class ClassDetailComponent implements OnInit {
   clsData!: IGymClass;
 
   trainers!: ITrainer[];
+  reservations!: IReservation[];
 
   page: number = 1;
   pageSize: number = 10;
   reviews!: IPageData<IReview>;
 
+  #authService = inject(AuthService);
   #gymClassesService = inject(GymClassesService);
+  #myReservationService = inject(MyReservationService);
 
   ngOnInit(): void {
     this.fetchClass();
     this.fetchTrainers();
+    this.fetchReservations();
     this.fetchReviews();
+  }
+
+  get isBooked() {
+    const myId = this.#authService.user?._id;
+    if (this.reservations && this.reservations.find((r) => r._id === myId)) {
+      return true;
+    }
+    return false;
   }
 
   private fetchClass() {
@@ -143,6 +194,20 @@ export class ClassDetailComponent implements OnInit {
       );
   }
 
+  private fetchReservations() {
+    this.#gymClassesService.getReservations(this.class_id).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.success) {
+          this.reservations = res.data.data;
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  }
+
   onPostComment(review: IReview): void {
     this.#gymClassesService.addReview(this.class_id, review).subscribe(
       (res) => {
@@ -164,6 +229,28 @@ export class ClassDetailComponent implements OnInit {
     }
     this.page = page;
     await this.fetchReviews();
+  }
+
+  onBooking() {
+    if (this.isBooked) {
+      this.#myReservationService
+        .deleteReservationByGymClassId(this.class_id)
+        .subscribe((res) => {
+          console.log(res);
+          if (res.success && res.data > 0) {
+            const myId = this.#authService.user?._id;
+            this.reservations = this.reservations.filter((r) => r._id !== myId);
+          }
+        });
+      return;
+    }
+    this.#gymClassesService.addReservation(this.class_id).subscribe((res) => {
+      console.log(res);
+      if (res.success && res.data > 0) {
+        const user = this.#authService.user;
+        this.reservations.push(user as IReservation);
+      }
+    });
   }
 
   protected readonly IconHelper = IconHelper;
