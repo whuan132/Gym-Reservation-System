@@ -6,6 +6,7 @@ import {
   deleteReviewByTrainerIdById,
   deleteTrainerById,
   getReviewsByTrainerId,
+  getTrainerById,
   getTrainers,
   updateReviewByTrainerIdById,
   updateTrainerById,
@@ -18,6 +19,7 @@ router.use(checkToken);
 router.route("/").get(getTrainers).post(checkAdmin, addTrainer);
 router
   .route("/:trainer_id")
+  .get(getTrainerById)
   .patch(checkAdmin, updateTrainerById)
   .delete(checkAdmin, deleteTrainerById);
 
