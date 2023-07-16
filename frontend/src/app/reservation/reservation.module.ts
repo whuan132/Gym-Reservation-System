@@ -12,8 +12,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GymClassesService } from "./classes/gym-classes.service";
 import { TrainersComponent } from "./trainer/trainers.component";
-import { AddGymClassComponent } from "./classes/add-gym-class.component";
-import { UpdateGymClassComponent } from "./classes/update-gym-class.component";
 import { TrainerAddComponent } from "./trainer/trainer-add.component";
 import { TrainerDetailComponent } from "./trainer/trainer-detail.component";
 import { RatingComponent } from "./common/rating.component";
@@ -22,27 +20,15 @@ import { LoadingComponent } from "./common/loading.component";
 import { ReviewEditorComponent } from "./common/review-editor.component";
 import { ReviewListComponent } from "./common/review-list.component";
 import { ClassDetailComponent } from "./classes/class-detail.component";
+import { ClassAddComponent } from "./classes/class-add.component";
+import { ClassItemComponent } from "./common/class-item.component";
+import { ClassUpdateComponent } from "./classes/class-update.component";
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
   { path: "classes", component: ClassesComponent, title: "Classes" },
   {
-    path: "classes/add",
-    component: AddGymClassComponent,
-    title: "AddGymClass",
-  },
-  {
-    path: "classes/update/:class_id",
-    component: UpdateGymClassComponent,
-    title: "UpdateGymClass",
-  },
-  {
-    path: "my",
-    component: MyReservationComponent,
-    title: "My Reservations",
-  },
-  {
-    path: "my/class/:class_id",
+    path: "classes/:class_id",
     component: ClassDetailComponent,
     title: "Class Detail",
   },
@@ -52,14 +38,17 @@ const MY_ROUTES: Routes = [
     component: TrainerDetailComponent,
     title: "Trainer Detail",
   },
+  {
+    path: "my",
+    component: MyReservationComponent,
+    title: "My Reservations",
+  },
 ];
 
 @NgModule({
   declarations: [
     ClassesComponent,
     MyReservationComponent,
-    AddGymClassComponent,
-    UpdateGymClassComponent,
     TrainersComponent,
     TrainerAddComponent,
     TrainerDetailComponent,
@@ -69,6 +58,9 @@ const MY_ROUTES: Routes = [
     ReviewEditorComponent,
     ReviewListComponent,
     ClassDetailComponent,
+    ClassAddComponent,
+    ClassItemComponent,
+    ClassUpdateComponent,
   ],
   imports: [
     CommonModule,

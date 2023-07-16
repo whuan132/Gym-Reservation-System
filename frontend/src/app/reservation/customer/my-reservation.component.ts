@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from "@angular/core";
 import { MyReservationService } from "./my-reservation.service";
 import { IGymClass } from "../../types/gym-class.interface";
 import { IPageData } from "../../types/page-data.interface";
-import IconHelper from "../../utils/IconHelper";
 
 @Component({
   selector: "app-my-reservation",
@@ -18,7 +17,7 @@ import IconHelper from "../../utils/IconHelper";
         </h2>
 
         <div *ngIf="!gymClasses?.data?.length">
-          <p>YOU HAVE NOT ANY RESERVATIONS.</p>
+          <p>YOU DO NOT HAVE ANY RESERVATIONS.</p>
         </div>
 
         <div *ngIf="gymClasses?.data?.length">
@@ -29,31 +28,7 @@ import IconHelper from "../../utils/IconHelper";
           />
           <div class="space-y-2 mt-4">
             <div *ngFor="let cls of gymClasses.data">
-              <a
-                [routerLink]="['', 'reservation', 'my', 'class', cls._id]"
-                class="flex flex-col items-center bg-white border border-gray-200
-              rounded-lg shadow md:flex-row hover:bg-gray-100
-              dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-              >
-                <img
-                  class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                  [src]="IconHelper.getRandomPicture(cls._id)"
-                  alt=""
-                />
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                  <h5
-                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                  >
-                    {{ cls.name }}
-                  </h5>
-
-                  <app-rating [rating]="cls.rating" />
-
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {{ cls.description }}
-                  </p>
-                </div>
-              </a>
+              <app-class-item [cls]="cls" />
             </div>
           </div>
         </div>
@@ -95,6 +70,4 @@ export class MyReservationComponent implements OnInit {
     this.page = page;
     await this.fetchMyReservations();
   }
-
-  protected readonly IconHelper = IconHelper;
 }

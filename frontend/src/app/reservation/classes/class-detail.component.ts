@@ -28,21 +28,21 @@ import { MyReservationService } from "../customer/my-reservation.service";
         </h2>
 
         <img
-          class="h-auto max-w-lg rounded-lg"
+          class="mb-2 h-auto max-w-lg rounded-lg"
           [src]="IconHelper.getRandomPicture(clsData._id)"
           alt="image description"
         />
 
-        <p
-          class="mt-2 tracking-tighter text-gray-500 md:text-lg dark:text-gray-400"
-        >
-          {{ clsData.description }}
-        </p>
+        <app-rating [rating]="clsData.rating" />
 
         <time
           class="mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"
           >{{ clsData.startDate | date }} - {{ clsData.endDate | date }}</time
         >
+
+        <p class="mb-2 text-gray-500 dark:text-gray-400 break-words">
+          {{ clsData.description }}
+        </p>
 
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
         <div class="flex flex-row space-x-8 mt-4">
@@ -68,8 +68,9 @@ import { MyReservationService } from "../customer/my-reservation.service";
           </div>
         </div>
 
-        <div class="mt-4">
+        <div class="mt-4 flex items-center justify-start px-3 py-2">
           <button
+            *ngIf="authService.isCustomer"
             (click)="onBooking()"
             [ngClass]="
               isBooked
@@ -108,6 +109,11 @@ import { MyReservationService } from "../customer/my-reservation.service";
                 : "Add to my reservations"
             }}
           </button>
+          <app-class-update
+            *ngIf="authService.isAdmin"
+            [cls]="clsData"
+            (classUpdated)="onClassUpdated($event)"
+          />
         </div>
 
         <app-review-editor (postComment)="onPostComment($event)" />
@@ -128,7 +134,7 @@ export class ClassDetailComponent implements OnInit {
   pageSize: number = 10;
   reviews!: IPageData<IReview>;
 
-  #authService = inject(AuthService);
+  authService = inject(AuthService);
   #gymClassesService = inject(GymClassesService);
   #myReservationService = inject(MyReservationService);
 
@@ -140,7 +146,7 @@ export class ClassDetailComponent implements OnInit {
   }
 
   get isBooked() {
-    const myId = this.#authService.user?._id;
+    const myId = this.authService.user?._id;
     if (this.reservations && this.reservations.find((r) => r._id === myId)) {
       return true;
     }
@@ -238,7 +244,7 @@ export class ClassDetailComponent implements OnInit {
         .subscribe((res) => {
           console.log(res);
           if (res.success && res.data > 0) {
-            const myId = this.#authService.user?._id;
+            const myId = this.authService.user?._id;
             this.reservations = this.reservations.filter((r) => r._id !== myId);
           }
         });
@@ -247,10 +253,19 @@ export class ClassDetailComponent implements OnInit {
     this.#gymClassesService.addReservation(this.class_id).subscribe((res) => {
       console.log(res);
       if (res.success && res.data > 0) {
-        const user = this.#authService.user;
+        const user = this.authService.user;
         this.reservations.push(user as IReservation);
       }
     });
+  }
+
+  onClassUpdated(obj: any) {
+    const original = this.clsData as any;
+    for (const key in original) {
+      if (obj[key] !== undefined && obj[key] !== original[key]) {
+        original[key] = obj[key];
+      }
+    }
   }
 
   protected readonly IconHelper = IconHelper;

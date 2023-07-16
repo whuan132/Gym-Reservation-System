@@ -29,7 +29,10 @@ export class GymClassesService {
   }
 
   addGymClass(gymClass: IGymClass) {
-    return this.#http.post(`${this.#serviceUrl}/classes`, gymClass);
+    return this.#http.post<IResponse<string>>(
+      `${this.#serviceUrl}/classes`,
+      gymClass,
+    );
   }
 
   getGymClass(class_id: string) {
