@@ -8,6 +8,7 @@ import { ITrainer } from "../../types/trainer.interface";
 import { IReservation } from "../../types/reservation.interface";
 import { AuthService } from "../../auth/auth.service";
 import { MyReservationService } from "../customer/my-reservation.service";
+import { ToastService } from "../../toast.service";
 
 @Component({
   selector: "app-class-detail",
@@ -66,6 +67,20 @@ import { MyReservationService } from "../customer/my-reservation.service";
               </div>
             </div>
           </div>
+        </div>
+
+        <label
+          for="reservations"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Customers ({{ reservations.length }}/{{ clsData.capacity }})</label
+        >
+        <div id="reservations" class="flex mb-4 -space-x-4">
+          <img
+            *ngFor="let customer of reservations"
+            class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+            [src]="IconHelper.getRandomProfilePicture(customer._id)"
+            [alt]="customer.name"
+          />
         </div>
 
         <div class="mt-4 flex items-center justify-start px-3 py-2">
@@ -137,6 +152,7 @@ export class ClassDetailComponent implements OnInit {
   authService = inject(AuthService);
   #gymClassesService = inject(GymClassesService);
   #myReservationService = inject(MyReservationService);
+  #toastService = inject(ToastService);
 
   ngOnInit(): void {
     this.fetchClass();
@@ -248,6 +264,10 @@ export class ClassDetailComponent implements OnInit {
             this.reservations = this.reservations.filter((r) => r._id !== myId);
           }
         });
+      return;
+    }
+    if (this.reservations.length >= this.clsData.capacity) {
+      this.#toastService.showNotification("It's full.");
       return;
     }
     this.#gymClassesService.addReservation(this.class_id).subscribe((res) => {
