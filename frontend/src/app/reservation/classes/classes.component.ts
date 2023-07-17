@@ -18,7 +18,10 @@ import { IPageData } from "../../types/page-data.interface";
 
         <app-class-add *ngIf="authService.isAdmin" (add)="onAddClass($event)" />
 
-        <div *ngIf="!gymClasses?.data?.length">
+        <div
+          *ngIf="!gymClasses?.data?.length"
+          class="my-36 text-xl text-gray-600 flex justify-center"
+        >
           <p>THERE IS NOT ANY CLASS.</p>
         </div>
 
