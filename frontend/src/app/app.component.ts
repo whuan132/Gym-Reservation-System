@@ -5,12 +5,11 @@ import { ToastService } from "./toast.service";
   selector: "app-root",
   template: ` <section class="bg-white dark:bg-gray-900">
     <app-nav />
+    <app-toast
+      *ngIf="toastService.toast().show"
+      [message]="toastService.toast().message"
+    />
     <div class="flex flex-col h-screen md:justify-between">
-      <app-toast
-        *ngIf="toastService.toast().show"
-        [message]="toastService.toast().message"
-      />
-
       <div class="self-start w-full">
         <router-outlet></router-outlet>
       </div>

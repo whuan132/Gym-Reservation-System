@@ -6,7 +6,7 @@ import { AuthService } from "./auth/auth.service";
 @Component({
   selector: "app-nav",
   template: `
-    <div class=" max-w-3xl">
+    <div class="max-w-3xl">
       <nav
         class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600"
       >
