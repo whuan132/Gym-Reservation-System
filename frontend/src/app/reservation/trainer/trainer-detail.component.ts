@@ -79,6 +79,11 @@ export class TrainerDetailComponent implements OnInit {
   #trainerService = inject(TrainerService);
 
   ngOnInit(): void {
+    this.fetchTrainer();
+    this.fetchReviews();
+  }
+
+  private fetchTrainer(): void {
     this.#trainerService.getTrainerById(this.trainer_id).subscribe(
       (res) => {
         if (res && res.success) {
@@ -89,7 +94,6 @@ export class TrainerDetailComponent implements OnInit {
         console.log(err);
       },
     );
-    this.fetchReviews();
   }
 
   private fetchReviews() {
@@ -116,6 +120,7 @@ export class TrainerDetailComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.success) {
+          this.fetchTrainer();
           this.fetchReviews();
         }
       },

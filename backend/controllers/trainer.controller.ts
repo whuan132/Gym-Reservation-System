@@ -254,6 +254,14 @@ export const addReviewByTrainerId: RequestHandler<
       },
     };
 
+    // Insert the new review
+    await trainerModel.updateOne(
+      { _id: req.params.trainer_id },
+      {
+        $push: { reviews: obj },
+      },
+    );
+
     // Find the class and calculate the average rating
     const result = await trainerModel.aggregate([
       { $match: { _id: new Types.ObjectId(req.params.trainer_id) } },
@@ -279,10 +287,12 @@ export const addReviewByTrainerId: RequestHandler<
       },
     ]);
 
-    // Update the class with the new review and average rating
+    // Update average rating
     await trainerModel.updateOne(
       { _id: req.params.trainer_id },
-      { $push: { reviews: obj }, $set: { rating: result?.[0]?.averageRating } },
+      {
+        $set: { rating: result?.[0]?.averageRating },
+      },
     );
     res.json({ success: true, data: obj._id.toString() });
   } catch (err) {

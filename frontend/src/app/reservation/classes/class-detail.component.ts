@@ -269,6 +269,7 @@ export class ClassDetailComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res.success) {
+          this.fetchClass();
           this.fetchReviews();
         }
       },
