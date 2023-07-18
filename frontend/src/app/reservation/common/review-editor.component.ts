@@ -7,7 +7,6 @@ import { IReview } from "../../types/review.interface";
   template: `
     <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="mt-4">
       <label
-        for="rating"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >Your rating</label
       >

@@ -16,7 +16,20 @@ import { IPageData } from "../../types/page-data.interface";
           Classes
         </h2>
 
-        <app-class-add *ngIf="authService.isAdmin" (add)="onAddClass($event)" />
+        <div class="flex flex-row items-center justify-between space-y-2">
+          <div>
+            <app-class-add
+              *ngIf="authService.isAdmin"
+              (add)="onAddClass($event)"
+            />
+          </div>
+          <app-page-selector
+            *ngIf="gymClasses?.data?.length"
+            [page]="page"
+            [totalPages]="totalPages"
+            (pageChanged)="goPage($event)"
+          />
+        </div>
 
         <div
           *ngIf="!gymClasses?.data?.length"
@@ -26,12 +39,6 @@ import { IPageData } from "../../types/page-data.interface";
         </div>
 
         <div *ngIf="gymClasses?.data?.length">
-          <app-page-selector
-            [page]="page"
-            [totalPages]="totalPages"
-            (pageChanged)="goPage($event)"
-          />
-
           <div class="space-y-2 mt-4">
             <div *ngFor="let cls of gymClasses.data">
               <app-class-item [cls]="cls" />
@@ -44,7 +51,7 @@ import { IPageData } from "../../types/page-data.interface";
   styles: [],
 })
 export class ClassesComponent implements OnInit {
-  #classService = inject(GymClassesService);
+  #gymClassesService = inject(GymClassesService);
   authService = inject(AuthService);
 
   page: number = 1;
@@ -57,7 +64,7 @@ export class ClassesComponent implements OnInit {
   }
 
   private fetchGymClasss() {
-    this.#classService.getGymClasss(this.page, this.pageSize).subscribe(
+    this.#gymClassesService.getGymClasss(this.page, this.pageSize).subscribe(
       (res) => {
         console.log(res);
         this.gymClasses = res.data;

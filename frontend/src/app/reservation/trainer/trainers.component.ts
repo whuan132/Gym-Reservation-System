@@ -20,10 +20,20 @@ import { AuthService } from "../../auth/auth.service";
           Trainers
         </h2>
 
-        <app-trainer-add
-          *ngIf="authService.isAdmin"
-          (add)="onAddTrainer($event)"
-        />
+        <div class="flex flex-row items-center justify-between space-y-2">
+          <div>
+            <app-trainer-add
+              *ngIf="authService.isAdmin"
+              (add)="onAddTrainer($event)"
+            />
+          </div>
+          <app-page-selector
+            *ngIf="data?.data?.length"
+            [page]="page"
+            [totalPages]="totalPages"
+            (pageChanged)="goPage($event)"
+          />
+        </div>
 
         <div
           *ngIf="!data?.data?.length"
@@ -33,12 +43,6 @@ import { AuthService } from "../../auth/auth.service";
         </div>
 
         <div *ngIf="data?.data?.length">
-          <app-page-selector
-            [page]="page"
-            [totalPages]="totalPages"
-            (pageChanged)="goPage($event)"
-          />
-
           <div class="space-y-2 mt-4">
             <article *ngFor="let trainer of data.data">
               <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />

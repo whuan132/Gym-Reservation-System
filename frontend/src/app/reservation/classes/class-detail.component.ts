@@ -46,11 +46,10 @@ import { ToastService } from "../../toast.service";
         </p>
 
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-        <div class="flex flex-row items-center">
+        <div *ngIf="trainers" class="flex flex-row items-center space-x-4">
           <label
-            for="trainers"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Trainers ({{ trainers?.length }})</label
+            >Trainers ({{ trainers.length }})</label
           >
           <app-class-trainer-add
             *ngIf="authService.isAdmin"
@@ -63,7 +62,7 @@ import { ToastService } from "../../toast.service";
             [classTrainers]="trainers"
           />
         </div>
-        <div id="trainers" class="flex mb-4 -space-x-4">
+        <div class="flex mb-4 -space-x-4">
           <div
             *ngFor="let trainer of trainers"
             class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
@@ -80,11 +79,11 @@ import { ToastService } from "../../toast.service";
         </div>
 
         <label
-          for="reservations"
+          *ngIf="reservations"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Customers ({{ reservations?.length }}/{{ clsData.capacity }})</label
+          >Customers ({{ reservations.length }}/{{ clsData.capacity }})</label
         >
-        <div id="reservations" class="flex mb-4 -space-x-4">
+        <div class="flex mb-4 -space-x-4">
           <img
             *ngFor="let customer of reservations"
             class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
