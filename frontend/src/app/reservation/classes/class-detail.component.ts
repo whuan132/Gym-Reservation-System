@@ -13,7 +13,9 @@ import { ToastService } from "../../toast.service";
 @Component({
   selector: "app-class-detail",
   template: `
-    <app-loading *ngIf="!clsData; else detail" />
+    <div class="mt-96" *ngIf="!clsData; else detail">
+      <app-loading />
+    </div>
 
     <ng-template #detail>
       <div class="mt-20 mx-auto w-full items-start md:max-w-2xl">
