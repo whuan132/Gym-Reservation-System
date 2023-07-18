@@ -70,6 +70,8 @@ export class ClassesComponent implements OnInit {
       (res) => {
         console.log(res);
         this.gymClasses = res.data;
+        this.page = res.data.page;
+        this.totalPages = Math.ceil(this.gymClasses.totalCount / this.pageSize);
       },
       (error) => {
         console.error(error);
