@@ -15,16 +15,17 @@ export const getTrainers: RequestHandler<
     data: ITrainer[];
   }>,
   {},
-  { page: string; page_size: string }
+  { page: string; page_size: string; query_key: string }
 > = async (req, res, next) => {
   try {
-    const [page, page_size] = [
+    const [page, page_size, query_key] = [
       parseInt(req.query.page || "1"),
       parseInt(req.query.page_size || "10"),
+      req.query.query_key || "",
     ];
     const result = await trainerModel
       .aggregate([
-        { $match: {} },
+        { $match: { name: { $regex: new RegExp(query_key, "i") } } },
         { $project: { reviews: 0, __v: 0 } },
         {
           $facet: {

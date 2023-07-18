@@ -23,6 +23,9 @@ import { ClassDetailComponent } from "./classes/class-detail.component";
 import { ClassAddComponent } from "./classes/class-add.component";
 import { ClassItemComponent } from "./common/class-item.component";
 import { ClassUpdateComponent } from "./classes/class-update.component";
+import { UserComponent } from "./users/user.component";
+import { UserDetailComponent } from "./users/user-detail.component";
+import { UserUpdateComponent } from "./users/user-update.component";
 import { ClassTrainerAddComponent } from "./classes/class-trainer-add.component";
 import { ClassTrainerRemoveComponent } from "./classes/class-trainer-remove.component";
 import { ModalComponent } from "./common/modal.component";
@@ -46,6 +49,12 @@ const MY_ROUTES: Routes = [
     component: MyReservationComponent,
     title: "My Reservations",
   },
+  { path: "users", component: UserComponent, title: "Users" },
+  {
+    path: "users/:user_id",
+    component: UserDetailComponent,
+    title: "User Detail",
+  },
 ];
 
 @NgModule({
@@ -67,6 +76,9 @@ const MY_ROUTES: Routes = [
     ClassTrainerAddComponent,
     ClassTrainerRemoveComponent,
     ModalComponent,
+    UserComponent,
+    UserDetailComponent,
+    UserUpdateComponent,
   ],
   imports: [
     CommonModule,

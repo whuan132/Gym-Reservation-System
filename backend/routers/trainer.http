@@ -63,3 +63,9 @@ Content-Type: application/json
 DELETE http://localhost:4000/trainers/64b0d94908e841d2f229ef85/reviews/64b0ddd59110644e59b6ad5a
 Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
 Accept: application/json
+
+
+###
+GET http://localhost:4000/trainers/?page=1&page_size=10&query_key=003
+Authorization: Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwNzU2MzRlMmY0Mjc4MDU3YTA4ODEiLCJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmVkdSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4OTI4NzY1OX0.DmrgZEESlu3C1yf-c4-gici7NgmG_jtOYZYZxY9ATkU
+Accept: application/json

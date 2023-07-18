@@ -8,6 +8,7 @@ import authRouter from "./routers/auth.router";
 import classesRouter from "./routers/gym-class.router";
 import trainerRouter from "./routers/trainer.router";
 import customerRouter from "./routers/customer.router";
+import userRouter from "./routers/user.router";
 
 dotenv.config();
 const app = express();
@@ -38,6 +39,7 @@ app.use("/auth", authRouter);
 app.use("/classes", classesRouter);
 app.use("/trainers", trainerRouter);
 app.use("/customer", customerRouter);
+app.use("/users", userRouter);
 
 // Catch all unhandled requests
 app.all("*", async (req, res, next) =>
