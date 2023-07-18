@@ -86,6 +86,20 @@ import { ToastService } from "../../toast.service";
           />
         </div>
 
+        <label
+          for="reservations"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Customers ({{ reservations.length }}/{{ clsData.capacity }})</label
+        >
+        <div id="reservations" class="flex mb-4 -space-x-4">
+          <img
+            *ngFor="let customer of reservations"
+            class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+            [src]="IconHelper.getRandomProfilePicture(customer._id)"
+            [alt]="customer.name"
+          />
+        </div>
+
         <div class="mt-4 flex items-center justify-start px-3 py-2">
           <button
             *ngIf="authService.isCustomer"

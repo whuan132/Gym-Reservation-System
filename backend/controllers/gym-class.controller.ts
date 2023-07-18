@@ -171,11 +171,11 @@ export const getTrainersByClassId: RequestHandler<
 export const addTrainerByClassId: RequestHandler<
   { class_id: string },
   DataResponse<string>,
-  { trainer_id: string; name: string }
+  { _id: string; name: string }
 > = async (req, res, next) => {
   try {
-    const { trainer_id, name } = req.body;
-    const obj = { _id: new Types.ObjectId(trainer_id), name: name };
+    const { _id, name } = req.body;
+    const obj = { _id: _id, name: name };
     await gymClassModel.updateOne(
       {
         _id: req.params.class_id,
