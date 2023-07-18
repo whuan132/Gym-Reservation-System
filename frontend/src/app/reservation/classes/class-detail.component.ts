@@ -64,12 +64,19 @@ import { ToastService } from "../../toast.service";
           />
         </div>
         <div id="trainers" class="flex mb-4 -space-x-4">
-          <img
+          <div
             *ngFor="let trainer of trainers"
             class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-            [src]="IconHelper.getRandomProfilePicture(trainer._id)"
-            [alt]="trainer.name"
-          />
+            [title]="trainer.name"
+          >
+            <a [routerLink]="['', 'reservation', 'trainers', trainer._id]">
+              <img
+                class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+                [src]="IconHelper.getRandomProfilePicture(trainer._id)"
+                [alt]="trainer.name"
+              />
+            </a>
+          </div>
         </div>
 
         <label
