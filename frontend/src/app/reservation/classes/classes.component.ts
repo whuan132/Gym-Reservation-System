@@ -7,7 +7,9 @@ import { IPageData } from "../../types/page-data.interface";
 @Component({
   selector: "app-classes",
   template: `
-    <app-loading *ngIf="!gymClasses; else list" />
+    <div class="mt-96" *ngIf="!gymClasses; else list">
+      <app-loading />
+    </div>
     <ng-template #list>
       <div class="mt-20 mx-auto w-full items-start md:max-w-2xl">
         <h2
@@ -68,6 +70,8 @@ export class ClassesComponent implements OnInit {
       (res) => {
         console.log(res);
         this.gymClasses = res.data;
+        this.page = res.data.page;
+        this.totalPages = Math.ceil(this.gymClasses.totalCount / this.pageSize);
       },
       (error) => {
         console.error(error);
