@@ -63,16 +63,13 @@ import { ToastService } from "../../toast.service";
           />
         </div>
         <div class="flex mb-4 -space-x-4">
-          <div
-            *ngFor="let trainer of trainers"
-            class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-            [title]="trainer.name"
-          >
+          <div *ngFor="let trainer of trainers">
             <a [routerLink]="['', 'reservation', 'trainers', trainer._id]">
               <img
                 class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
                 [src]="IconHelper.getRandomProfilePicture(trainer._id)"
                 [alt]="trainer.name"
+                [title]="trainer.name"
               />
             </a>
           </div>
@@ -89,6 +86,7 @@ import { ToastService } from "../../toast.service";
             class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
             [src]="IconHelper.getRandomProfilePicture(customer._id)"
             [alt]="customer.name"
+            [title]="customer.name"
           />
         </div>
         <div class="mt-4 flex items-center justify-start px-3 py-2">
