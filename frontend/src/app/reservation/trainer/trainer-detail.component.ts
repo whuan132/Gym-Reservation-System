@@ -4,6 +4,7 @@ import { TrainerService } from "./trainer.service";
 import { IReview } from "../../types/review.interface";
 import { IPageData } from "../../types/page-data.interface";
 import IconHelper from "../../utils/IconHelper";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-trainer-detail",
@@ -52,6 +53,13 @@ import IconHelper from "../../utils/IconHelper";
           </div>
         </div>
 
+        <div *ngIf="authService.isAdmin" class="mt-4">
+          <app-trainer-update
+            [trainer]="trainer"
+            (trainerUpdated)="onTrainerUpdated($event)"
+          />
+        </div>
+
         <app-review-editor (postComment)="onPostComment($event)" />
         <app-review-list [reviews]="reviews" (pageChanged)="goPage($event)" />
       </div>
@@ -67,6 +75,7 @@ export class TrainerDetailComponent implements OnInit {
   trainer!: ITrainer;
   reviews!: IPageData<IReview>;
 
+  authService = inject(AuthService);
   #trainerService = inject(TrainerService);
 
   ngOnInit(): void {
@@ -114,6 +123,15 @@ export class TrainerDetailComponent implements OnInit {
         console.log(err);
       },
     );
+  }
+
+  onTrainerUpdated(obj: any) {
+    const original = this.trainer as any;
+    for (const key in original) {
+      if (obj[key] !== undefined && obj[key] !== original[key]) {
+        original[key] = obj[key];
+      }
+    }
   }
 
   async goPage(p: number) {

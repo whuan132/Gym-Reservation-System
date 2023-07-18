@@ -29,6 +29,7 @@ import { UserUpdateComponent } from "./users/user-update.component";
 import { ClassTrainerAddComponent } from "./classes/class-trainer-add.component";
 import { ClassTrainerRemoveComponent } from "./classes/class-trainer-remove.component";
 import { ModalComponent } from "./common/modal.component";
+import { TrainerUpdateComponent } from './trainer/trainer-update.component';
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -79,6 +80,7 @@ const MY_ROUTES: Routes = [
     UserComponent,
     UserDetailComponent,
     UserUpdateComponent,
+    TrainerUpdateComponent,
   ],
   imports: [
     CommonModule,
