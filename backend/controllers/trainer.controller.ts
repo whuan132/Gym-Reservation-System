@@ -4,6 +4,7 @@ import trainerModel, { ITrainer } from "../models/trainer.model";
 import { Types } from "mongoose";
 import { IReview } from "../models/review.schema";
 import { TokenData } from "../types/TokenData";
+import gymClassModel from "../models/gym-class.model";
 
 export const getTrainers: RequestHandler<
   {},
@@ -126,6 +127,15 @@ export const updateTrainerById: RequestHandler<
       },
       { $set: obj },
     );
+
+    // update class trainers
+    if (name && result && result.modifiedCount > 0) {
+      await gymClassModel.updateMany(
+        { "trainers._id": req.params.trainer_id },
+        { $set: { "trainers.$.name": name } },
+      );
+    }
+
     res.json({ success: true, data: result.modifiedCount });
   } catch (err) {
     next(err);
@@ -140,6 +150,13 @@ export const deleteTrainerById: RequestHandler<
     const result = await trainerModel.deleteOne({
       _id: req.params.trainer_id,
     });
+    // delete trainer on class
+    if (result && result.deletedCount > 0) {
+      await gymClassModel.updateMany(
+        { "trainers._id": req.params.trainer_id },
+        { $pull: { trainers: { _id: req.params.trainer_id } } },
+      );
+    }
     res.json({ success: true, data: result.deletedCount });
   } catch (err) {
     next(err);

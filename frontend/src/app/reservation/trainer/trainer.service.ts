@@ -31,6 +31,19 @@ export class TrainerService {
     );
   }
 
+  updateTrainerById(trainer_id: string, obj: ITrainer) {
+    return this.#http.patch<IResponse<number>>(
+      this.#serviceUrl + `/trainers/${trainer_id}`,
+      obj,
+    );
+  }
+
+  deleteTrainerById(trainer_id: string) {
+    return this.#http.delete<IResponse<number>>(
+      this.#serviceUrl + `/trainers/${trainer_id}`,
+    );
+  }
+
   addReview(trainer_id: string, obj: IReview) {
     return this.#http.post<IResponse<string>>(
       this.#serviceUrl + `/trainers/${trainer_id}/reviews`,
