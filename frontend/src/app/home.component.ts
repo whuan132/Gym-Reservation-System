@@ -7,10 +7,10 @@ import IconHelper from "./utils/IconHelper";
     <div class="mt-20 mx-auto w-full items-start md:max-w-2xl">
       <h2 class="mb-4 items-start text-5xl font-extrabold dark:text-white">
         Gym Reservation
+        <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400">
+          MWA Final Project July-2023
+        </small>
       </h2>
-      <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400">
-        MWA Final Project July-2023
-      </small>
 
       <img
         class="mb-2 h-auto max-w-lg rounded-lg"

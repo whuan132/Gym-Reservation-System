@@ -82,4 +82,17 @@ export class GymClassesService {
       {},
     );
   }
+
+  addTrainer(class_id: string, trainer: ITrainer) {
+    return this.#http.post<IResponse<string>>(
+      `${this.#serviceUrl}/classes/${class_id}/trainers/`,
+      trainer,
+    );
+  }
+
+  removeTrainer(class_id: string, trainer_id: string) {
+    return this.#http.delete<IResponse<number>>(
+      `${this.#serviceUrl}/classes/${class_id}/trainers/${trainer_id}`,
+    );
+  }
 }

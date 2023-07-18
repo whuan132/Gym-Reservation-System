@@ -8,6 +8,7 @@ import { ITrainer } from "../../types/trainer.interface";
 import { IReservation } from "../../types/reservation.interface";
 import { AuthService } from "../../auth/auth.service";
 import { MyReservationService } from "../customer/my-reservation.service";
+import { ToastService } from "../../toast.service";
 
 @Component({
   selector: "app-class-detail",
@@ -45,27 +46,44 @@ import { MyReservationService } from "../customer/my-reservation.service";
         </p>
 
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-        <div class="flex flex-row space-x-8 mt-4">
-          <div *ngFor="let trainer of trainers">
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0">
-                <img
-                  class="w-8 h-8 rounded-full"
-                  [src]="IconHelper.getRandomProfilePicture(trainer._id)"
-                  alt="Neil image"
-                />
-              </div>
-              <div class="flex-1 min-w-0">
-                <a [routerLink]="['', 'reservation', 'trainers', trainer._id]">
-                  <p
-                    class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                  >
-                    {{ trainer.name }}
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div class="flex flex-row items-center">
+          <label
+            for="trainers"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Trainers ({{ trainers?.length }})</label
+          >
+          <app-class-trainer-add
+            *ngIf="authService.isAdmin"
+            (chooseTrainer)="onAddTrainer($event)"
+            [classTrainers]="trainers"
+          />
+          <app-class-trainer-remove
+            *ngIf="authService.isAdmin"
+            (chooseTrainer)="onRemoveTrainer($event)"
+            [classTrainers]="trainers"
+          />
+        </div>
+        <div id="trainers" class="flex mb-4 -space-x-4">
+          <img
+            *ngFor="let trainer of trainers"
+            class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+            [src]="IconHelper.getRandomProfilePicture(trainer._id)"
+            [alt]="trainer.name"
+          />
+        </div>
+
+        <label
+          for="reservations"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Customers ({{ reservations?.length }}/{{ clsData.capacity }})</label
+        >
+        <div id="reservations" class="flex mb-4 -space-x-4">
+          <img
+            *ngFor="let customer of reservations"
+            class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
+            [src]="IconHelper.getRandomProfilePicture(customer._id)"
+            [alt]="customer.name"
+          />
         </div>
 
         <div class="mt-4 flex items-center justify-start px-3 py-2">
@@ -137,6 +155,7 @@ export class ClassDetailComponent implements OnInit {
   authService = inject(AuthService);
   #gymClassesService = inject(GymClassesService);
   #myReservationService = inject(MyReservationService);
+  #toastService = inject(ToastService);
 
   ngOnInit(): void {
     this.fetchClass();
@@ -214,6 +233,34 @@ export class ClassDetailComponent implements OnInit {
     );
   }
 
+  onAddTrainer(trainer: ITrainer) {
+    this.#gymClassesService.addTrainer(this.class_id, trainer).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.success) {
+          this.fetchTrainers();
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  }
+
+  onRemoveTrainer(trainer: ITrainer) {
+    this.#gymClassesService.removeTrainer(this.class_id, trainer._id).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.success) {
+          this.fetchTrainers();
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  }
+
   onPostComment(review: IReview): void {
     this.#gymClassesService.addReview(this.class_id, review).subscribe(
       (res) => {
@@ -248,6 +295,10 @@ export class ClassDetailComponent implements OnInit {
             this.reservations = this.reservations.filter((r) => r._id !== myId);
           }
         });
+      return;
+    }
+    if (this.reservations?.length >= this.clsData?.capacity) {
+      this.#toastService.showNotification("It's full.");
       return;
     }
     this.#gymClassesService.addReservation(this.class_id).subscribe((res) => {

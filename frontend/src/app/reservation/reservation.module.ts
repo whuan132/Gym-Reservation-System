@@ -23,6 +23,8 @@ import { ClassDetailComponent } from "./classes/class-detail.component";
 import { ClassAddComponent } from "./classes/class-add.component";
 import { ClassItemComponent } from "./common/class-item.component";
 import { ClassUpdateComponent } from "./classes/class-update.component";
+import { ClassTrainerAddComponent } from './classes/class-trainer-add.component';
+import { ClassTrainerRemoveComponent } from './classes/class-trainer-remove.component';
 
 const MY_ROUTES: Routes = [
   { path: "", redirectTo: "classes", pathMatch: "full" },
@@ -61,6 +63,8 @@ const MY_ROUTES: Routes = [
     ClassAddComponent,
     ClassItemComponent,
     ClassUpdateComponent,
+    ClassTrainerAddComponent,
+    ClassTrainerRemoveComponent,
   ],
   imports: [
     CommonModule,
