@@ -68,7 +68,7 @@ import IconHelper from "../../utils/IconHelper";
                 <h3
                   class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                  Choose a trainer
+                  Remove a trainer
                 </h3>
 
                 <!-- Dropdown menu -->

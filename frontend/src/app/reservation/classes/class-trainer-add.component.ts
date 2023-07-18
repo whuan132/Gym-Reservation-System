@@ -69,45 +69,50 @@ import IconHelper from "../../utils/IconHelper";
                 <h3
                   class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                  Choose a trainer
+                  Add a trainer
                 </h3>
 
-                <!-- Dropdown menu -->
-                <div
-                  *ngFor="let trainer of data?.data"
-                  class="divide-y divide-gray-100 dark:divide-gray-700"
-                >
-                  <a
-                    (click)="onChooseTrainer(trainer)"
-                    class="flex space-x-4 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <div class="flex-shrink-0">
-                      <img
-                        class="w-8 h-8 rounded-full"
-                        [src]="IconHelper.getRandomProfilePicture(trainer._id)"
-                        alt="Neil image"
-                      />
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p
-                        class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                      >
-                        {{ trainer.name }}
-                      </p>
-                      <p
-                        class="text-sm text-gray-500 truncate dark:text-gray-400"
-                      >
-                        {{ trainer.email }}
-                      </p>
-                    </div>
-                  </a>
-                </div>
+                <app-loading *ngIf="!data; else list" />
 
-                <app-page-selector
-                  [page]="page"
-                  [totalPages]="totalPages"
-                  (pageChanged)="goPage($event)"
-                />
+                <ng-template #list>
+                  <div
+                    *ngFor="let trainer of data?.data"
+                    class="divide-y divide-gray-100 dark:divide-gray-700"
+                  >
+                    <a
+                      (click)="onChooseTrainer(trainer)"
+                      class="flex space-x-4 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      <div class="flex-shrink-0">
+                        <img
+                          class="w-8 h-8 rounded-full"
+                          [src]="
+                            IconHelper.getRandomProfilePicture(trainer._id)
+                          "
+                          alt="Neil image"
+                        />
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p
+                          class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                        >
+                          {{ trainer.name }}
+                        </p>
+                        <p
+                          class="text-sm text-gray-500 truncate dark:text-gray-400"
+                        >
+                          {{ trainer.email }}
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <app-page-selector
+                    [page]="page"
+                    [totalPages]="totalPages"
+                    (pageChanged)="goPage($event)"
+                  />
+                </ng-template>
               </div>
             </div>
           </div>
@@ -124,11 +129,11 @@ export class ClassTrainerAddComponent {
   page: number = 1;
   pageSize: number = 10;
   totalPages: number = 1;
-  data!: IPageData<ITrainer>;
+  data!: IPageData<ITrainer> | null;
   #trainerService = inject(TrainerService);
   #modal!: Modal;
 
-  private async fetchData() {
+  private fetchData() {
     this.#trainerService.getTrainers(this.page, this.pageSize).subscribe(
       (res) => {
         console.log(res);
@@ -175,12 +180,12 @@ export class ClassTrainerAddComponent {
       this.#modal = new Modal($modalElement, modalOptions as ModalOptions);
       this.#modal._init();
     }
-    await this.fetchData();
+    this.fetchData();
     this.#modal.show();
   }
 
   hideModal() {
-    this.data.data.length = 0;
+    this.data = null;
     this.#modal && this.#modal.hide();
   }
 

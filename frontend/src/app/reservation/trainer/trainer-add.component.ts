@@ -13,7 +13,7 @@ import IconHelper from "../../utils/IconHelper";
     >
       <button
         (click)="showModal()"
-        data-modal-target="member-modal"
+        data-modal-target="trainer-add-modal"
         type="button"
         aria-expanded="false"
         class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -41,7 +41,7 @@ import IconHelper from "../../utils/IconHelper";
       <div>
         <!-- Main modal -->
         <div
-          id="member-modal"
+          id="trainer-add-modal"
           tabindex="-1"
           aria-hidden="true"
           class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
@@ -116,7 +116,7 @@ import IconHelper from "../../utils/IconHelper";
                   <button
                     type="submit"
                     class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-hide="member-modal"
+                    data-modal-hide="trainer-add-modal"
                   >
                     Submit
                   </button>
@@ -145,7 +145,7 @@ export class TrainerAddComponent {
 
   showModal() {
     const $modalElement = document.querySelector(
-      "#member-modal",
+      "#trainer-add-modal",
     ) as HTMLElement;
 
     if (!this.#modal) {
