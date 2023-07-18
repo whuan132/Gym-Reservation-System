@@ -295,6 +295,14 @@ export const addReviewByClassId: RequestHandler<
       },
     };
 
+    // Insert new review
+    await gymClassModel.updateOne(
+      { _id: req.params.class_id },
+      {
+        $push: { reviews: obj },
+      },
+    );
+
     // Find the class and calculate the average rating
     const result = await gymClassModel.aggregate([
       { $match: { _id: new Types.ObjectId(req.params.class_id) } },
@@ -320,10 +328,12 @@ export const addReviewByClassId: RequestHandler<
       },
     ]);
 
-    // Update the class with the new review and average rating
+    // Update  average rating
     await gymClassModel.updateOne(
       { _id: req.params.class_id },
-      { $push: { reviews: obj }, $set: { rating: result?.[0]?.averageRating } },
+      {
+        $set: { rating: result?.[0]?.averageRating },
+      },
     );
     res.json({ success: true, data: obj._id.toString() });
   } catch (err) {
