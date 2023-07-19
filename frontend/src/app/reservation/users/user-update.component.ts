@@ -16,7 +16,7 @@ import { IUser } from "../../types/user.interface";
         aria-expanded="false"
         class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Update class
+        Update user
       </button>
     </div>
 
@@ -57,7 +57,7 @@ import { IUser } from "../../types/user.interface";
                 <h3
                   class="mb-4 text-xl font-medium text-gray-900 dark:text-white"
                 >
-                  Update Class
+                  Update User
                 </h3>
                 <form
                   class="space-y-6"
